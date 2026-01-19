@@ -1,0 +1,68 @@
+{
+  "app": {
+    "eyebrow": "Mirror 工作台",
+    "title": "路由预览",
+    "description": "此导航由 React Router 提供，已准备好承载多页面。",
+    "nav": {
+      "overview": "概览",
+      "status": "状态"
+    },
+    "language": {
+      "label": "语言",
+      "en": "English",
+      "zh": "中文"
+    }
+  },
+  "home": {
+    "badge": "Tailwind 就绪",
+    "title": "Mirror 界面预览",
+    "description": "一个包含渐变、卡片与按钮的 Tailwind 示例。若你能看到这些样式，说明已生效。",
+    "bullets": {
+      "tailwind": "Tailwind v4 Vite 插件已启用",
+      "utilities": "工具类已编译",
+      "polish": "组件细节优化中"
+    },
+    "buttons": {
+      "clicked": "已点击 {{count}} 次",
+      "details": "查看详情"
+    },
+    "status": {
+      "title": "实时状态",
+      "latency": "延迟",
+      "latencyValue": "128ms",
+      "deploy": "部署",
+      "deployValue": "正常"
+    }
+  },
+  "status": {
+    "title": "系统状态",
+    "description": "来自服务与流水线的实时信号。",
+    "services": {
+      "api": "API 网关",
+      "queue": "任务队列",
+      "realtime": "实时同步"
+    },
+    "labels": {
+      "healthy": "健康",
+      "degraded": "降级"
+    },
+    "activity": {
+      "title": "动态",
+      "description": "与你有关的最近部署与事件。",
+      "items": {
+        "deploy": "部署 1.8.2",
+        "deployMeta": "13 分钟前 · 2 个区域",
+        "queue": "队列波动",
+        "queueMeta": "1 小时前 · 已自动扩容",
+        "security": "安全巡检",
+        "securityMeta": "昨天 · 无异常"
+      }
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "title": "页面未找到",
+    "description": "你访问的页面不存在或已被移除。",
+    "back": "返回概览"
+  }
+}

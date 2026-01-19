@@ -1,0 +1,68 @@
+{
+  "app": {
+    "eyebrow": "Mirror Workspace",
+    "title": "Routing Preview",
+    "description": "This navigation is powered by React Router, ready for multiple pages.",
+    "nav": {
+      "overview": "Overview",
+      "status": "Status"
+    },
+    "language": {
+      "label": "Language",
+      "en": "English",
+      "zh": "中文"
+    }
+  },
+  "home": {
+    "badge": "Tailwind Ready",
+    "title": "Mirror UI Preview",
+    "description": "A small Tailwind sample with gradients, cards, and buttons. If you can see this styling, Tailwind is working.",
+    "bullets": {
+      "tailwind": "Tailwind v4 Vite plugin active",
+      "utilities": "Utility classes compiled",
+      "polish": "Component polish in progress"
+    },
+    "buttons": {
+      "clicked": "Clicked {{count}} times",
+      "details": "View details"
+    },
+    "status": {
+      "title": "Live Status",
+      "latency": "Latency",
+      "latencyValue": "128ms",
+      "deploy": "Deploy",
+      "deployValue": "Green"
+    }
+  },
+  "status": {
+    "title": "System Status",
+    "description": "Live signals from your services and pipelines.",
+    "services": {
+      "api": "API Gateway",
+      "queue": "Worker Queue",
+      "realtime": "Realtime Sync"
+    },
+    "labels": {
+      "healthy": "Healthy",
+      "degraded": "Degraded"
+    },
+    "activity": {
+      "title": "Activity",
+      "description": "Recent deploys and incidents that matter to you.",
+      "items": {
+        "deploy": "Deploy 1.8.2",
+        "deployMeta": "13 minutes ago · 2 regions",
+        "queue": "Queue spike",
+        "queueMeta": "1 hour ago · autoscaled",
+        "security": "Security sweep",
+        "securityMeta": "Yesterday · no findings"
+      }
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has moved.",
+    "back": "Back to overview"
+  }
+}

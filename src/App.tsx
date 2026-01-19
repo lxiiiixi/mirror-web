@@ -1,9 +1,17 @@
+import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Status from './pages/Status'
 
 function App() {
+  const { t, i18n } = useTranslation()
+
+  useEffect(() => {
+    document.documentElement.lang = i18n.resolvedLanguage ?? 'en'
+  }, [i18n.resolvedLanguage])
+
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     [
       'rounded-full border px-4 py-2 text-sm font-semibold transition',
@@ -11,6 +19,14 @@ function App() {
         ? 'border-slate-900 bg-slate-900 text-white shadow shadow-slate-900/20'
         : 'border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-900',
     ].join(' ')
+  const languageButtonClass = (isActive: boolean) =>
+    [
+      'rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] transition',
+      isActive
+        ? 'border-emerald-400 bg-emerald-100 text-emerald-700'
+        : 'border-slate-200 text-slate-500 hover:border-slate-300 hover:text-slate-700',
+    ].join(' ')
+  const currentLanguage = i18n.resolvedLanguage ?? 'en'
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-slate-50 via-white to-emerald-50 text-slate-900">
@@ -18,24 +34,44 @@ function App() {
         <header className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700">
-              Mirror Workspace
+              {t('app.eyebrow')}
             </p>
             <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-              Routing Preview
+              {t('app.title')}
             </h1>
             <p className="mt-2 max-w-xl text-sm text-slate-600">
-              This navigation is powered by React Router, ready for multiple
-              pages.
+              {t('app.description')}
             </p>
           </div>
-          <nav className="flex flex-wrap gap-3">
-            <NavLink className={navLinkClass} to="/">
-              Overview
-            </NavLink>
-            <NavLink className={navLinkClass} to="/status">
-              Status
-            </NavLink>
-          </nav>
+          <div className="flex flex-col gap-4 sm:items-end">
+            <nav className="flex flex-wrap gap-3">
+              <NavLink className={navLinkClass} to="/">
+                {t('app.nav.overview')}
+              </NavLink>
+              <NavLink className={navLinkClass} to="/status">
+                {t('app.nav.status')}
+              </NavLink>
+            </nav>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+                {t('app.language.label')}
+              </span>
+              <button
+                className={languageButtonClass(currentLanguage === 'en')}
+                onClick={() => i18n.changeLanguage('en')}
+                type="button"
+              >
+                {t('app.language.en')}
+              </button>
+              <button
+                className={languageButtonClass(currentLanguage === 'zh-CN')}
+                onClick={() => i18n.changeLanguage('zh-CN')}
+                type="button"
+              >
+                {t('app.language.zh')}
+              </button>
+            </div>
+          </div>
         </header>
 
         <main className="flex-1">
