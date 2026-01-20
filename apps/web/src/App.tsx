@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound'
 import Status from './pages/Status'
 import UIShowcase from './pages/UIShowcase'
 import { Button } from './ui'
+import { images } from '@mirror/assets'
 
 function App() {
   const { t, i18n } = useTranslation()
@@ -66,6 +67,8 @@ function App() {
               </Button>
             ))}
         </header>
+
+        <img src={images.logo} alt="Logo" />
 
         <main className="flex-1">
           <Routes>

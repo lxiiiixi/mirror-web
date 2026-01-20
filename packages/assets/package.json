@@ -2,12 +2,18 @@
   "name": "@mirror/assets",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
     "fonts",
     "fonts.css",
+    "icons",
+    "images",
+    "img",
+    "favicon.ico",
     "index.js",
-    "index.d.ts"
+    "index.d.ts",
+    "tonconnect-manifest.json"
   ]
 }
