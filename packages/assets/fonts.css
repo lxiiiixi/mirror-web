@@ -15,6 +15,14 @@
 }
 
 @font-face {
+  font-family: "font_Rubik";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/Rubik.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "Rubik";
   font-weight: 100 900;
   font-style: normal;
@@ -31,6 +39,14 @@
 }
 
 @font-face {
+  font-family: "Rubik-italic";
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+  src: url("./fonts/Rubik-Italic-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "Fredoka";
   font-weight: 400;
   font-style: normal;
@@ -39,7 +55,23 @@
 }
 
 @font-face {
+  font-family: "font_Fredoka";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/Fredoka.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "Passion";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/Passion.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "font_Passion";
   font-weight: 400;
   font-style: normal;
   font-display: swap;

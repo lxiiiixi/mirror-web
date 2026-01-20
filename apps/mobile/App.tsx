@@ -7,9 +7,16 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+
+// const defaultFontStyle = { fontFamily: 'Rubik' };
+// Text.defaultProps = Text.defaultProps ?? {};
+// Text.defaultProps.style = [defaultFontStyle, Text.defaultProps.style];
+// TextInput.defaultProps = TextInput.defaultProps ?? {};
+// TextInput.defaultProps.style = [defaultFontStyle, TextInput.defaultProps.style];
 
 export default function App() {
   const [count, setCount] = useState(0);
