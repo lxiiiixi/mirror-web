@@ -1,0 +1,71 @@
+@font-face {
+  font-family: "iconfont";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/iconfont.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Rubik";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/Rubik.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Rubik";
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/Rubik-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Rubik";
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+  src: url("./fonts/Rubik-Italic-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Fredoka";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/Fredoka.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Passion";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/Passion.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SquadaOne";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/SquadaOne.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "RubikGlitch";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/RubikGlitch.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "RubikMonoOne";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("./fonts/RubikMonoOne.ttf") format("truetype");
+}

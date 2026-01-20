@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react'
 
-export type ButtonVariant = 'primary' | 'secondary'
+export type ButtonVariant = 'primary' | 'secondary' | 'gradient'
 export type ButtonSize = 'small' | 'medium' | 'large'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -8,6 +8,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
    * 按钮变体
    * - primary: 主题色按钮 (#EB1484)
    * - secondary: 半透明灰色按钮
+   * - gradient: 渐变主题按钮
    */
   variant?: ButtonVariant
   
@@ -86,6 +87,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         'hover:bg-[--color-secondary-hover]',
         'hover:border-[--color-border-secondary-focus]',
         'active:bg-[--color-secondary-active]',
+        'disabled:opacity-50',
+        'disabled:cursor-not-allowed',
+        'disabled:active:scale-100',
+      ],
+      gradient: [
+        'bg-[image:var(--gradient-primary)]',
+        'text-white',
+        'border-0',
+        'shadow-[0_16px_40px_rgba(240,99,205,0.25)]',
+        'hover:brightness-105',
+        'active:brightness-95',
         'disabled:opacity-50',
         'disabled:cursor-not-allowed',
         'disabled:active:scale-100',

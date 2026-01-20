@@ -1,3 +1,5 @@
+import { fonts } from '@mirror/assets';
+import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import {
@@ -11,6 +13,11 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   const [count, setCount] = useState(0);
+  const [fontsLoaded] = useFonts(fonts);
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <SafeAreaProvider>
@@ -113,11 +120,13 @@ const styles = StyleSheet.create({
     fontSize: 10,
     letterSpacing: 1.2,
     fontWeight: '700',
+    fontFamily: 'Rubik',
     color: '#047857',
   },
   title: {
     fontSize: 28,
     fontWeight: '700',
+    fontFamily: 'Rubik',
     color: '#0f172a',
   },
   subtitle: {
