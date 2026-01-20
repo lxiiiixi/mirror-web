@@ -7,6 +7,7 @@ import Landing from './pages/Landing'
 import MobileOnly from './pages/MobileOnly'
 import NotFound from './pages/NotFound'
 import Status from './pages/Status'
+import UIShowcase from './pages/UIShowcase'
 
 function App() {
   const { t, i18n } = useTranslation()
@@ -36,7 +37,7 @@ function App() {
     : t('app.descriptionMobile')
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-slate-50 via-white to-emerald-50 text-slate-900">
+    <div className="min-h-screen w-full bg-linear-to-br from-slate-50 via-white to-emerald-50 text-slate-900">
       <div className="mx-auto flex max-w-5xl flex-col gap-10 px-6 py-12">
         <header className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
@@ -53,11 +54,14 @@ function App() {
           <div className="flex flex-col gap-4 sm:items-end">
             {!isDesktop ? (
               <nav className="flex flex-wrap gap-3">
-                <NavLink className={navLinkClass} to="/">
+                <NavLink className={navLinkClass} to="/" >
                   {t('app.nav.overview')}
                 </NavLink>
                 <NavLink className={navLinkClass} to="/status">
                   {t('app.nav.status')}
+                </NavLink>
+                <NavLink className={navLinkClass} to="/ui">
+                  {t('app.nav.ui')}
                 </NavLink>
               </nav>
             ) : null}
@@ -94,6 +98,7 @@ function App() {
               <>
                 <Route element={<Home />} path="/" />
                 <Route element={<Status />} path="/status" />
+                <Route element={<UIShowcase />} path="/ui" />
                 <Route element={<NotFound />} path="*" />
               </>
             )}

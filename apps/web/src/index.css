@@ -1,6 +1,19 @@
 @import "tailwindcss";
 
 :root {
+  /* 自定义主题色配置 - Mirror UI */
+  --color-primary: #EB1484;
+  --color-primary-hover: #D01276;
+  --color-primary-active: #B81068;
+  
+  --color-secondary-bg: rgba(126, 126, 126, 0.3);
+  --color-secondary-hover: rgba(126, 126, 126, 0.4);
+  --color-secondary-active: rgba(126, 126, 126, 0.5);
+  
+  --color-border-secondary: rgba(255, 255, 255, 0.3);
+  --color-border-secondary-focus: rgba(255, 255, 255, 0.5);
+
+  /* 基础样式 */
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
