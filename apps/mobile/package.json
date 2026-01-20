@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mirror/assets": "workspace:*",
+    "@mirror/locales": "workspace:*",
     "expo": "~54.0.31",
     "expo-font": "~14.0.10",
     "expo-status-bar": "~3.0.9",

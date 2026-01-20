@@ -2,12 +2,12 @@ import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
-import en from './locales/en/common.json'
-import zhCN from './locales/zh-CN/common.json'
+import en from '@mirror/locales/en.json'
+import zhHK from '@mirror/locales/zh-hk.json'
 
 const resources = {
   en: { common: en },
-  'zh-CN': { common: zhCN },
+  'zh-hk': { common: zhHK },
 }
 
 void i18n
@@ -16,7 +16,7 @@ void i18n
   .init({
     resources,
     fallbackLng: 'en',
-    supportedLngs: ['en', 'zh-CN'],
+    supportedLngs: ['en', 'zh-hk'],
     defaultNS: 'common',
     ns: ['common'],
     interpolation: {

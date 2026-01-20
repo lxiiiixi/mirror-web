@@ -17,6 +17,9 @@ importers:
       '@mirror/assets':
         specifier: workspace:*
         version: link:../../packages/assets
+      '@mirror/locales':
+        specifier: workspace:*
+        version: link:../../packages/locales
       expo:
         specifier: ~54.0.31
         version: 54.0.31(@babel/core@7.28.6)(react-native@0.81.5(@babel/core@7.28.6)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
@@ -51,6 +54,9 @@ importers:
       '@mirror/assets':
         specifier: workspace:*
         version: link:../../packages/assets
+      '@mirror/locales':
+        specifier: workspace:*
+        version: link:../../packages/locales
       i18next:
         specifier: ^25.7.4
         version: 25.7.4(typescript@5.9.3)
@@ -111,6 +117,8 @@ importers:
         version: 7.3.1(@types/node@25.0.9)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(yaml@2.8.2)
 
   packages/assets: {}
+
+  packages/locales: {}
 
 packages:
 

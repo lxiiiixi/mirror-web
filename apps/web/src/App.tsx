@@ -4,7 +4,6 @@ import { NavLink, Route, Routes } from 'react-router-dom'
 import useMediaQuery from './hooks/useMediaQuery'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
-import Status from './pages/Status'
 import UIShowcase from './pages/UIShowcase'
 import { Button } from './ui'
 import { images } from '@mirror/assets'
@@ -48,15 +47,12 @@ function App() {
               <NavLink className={navLinkClass} to="/">
                 {t('app.nav.overview')}
               </NavLink>
-              <NavLink className={navLinkClass} to="/status">
-                {t('app.nav.status')}
-              </NavLink>
               <NavLink className={navLinkClass} to="/ui">
                 UI
               </NavLink>
             </nav>
           </div>
-          {["en", "zh-CN"].map((language) => language !== currentLanguage && (
+          {["en", "zh-hk"].map((language) => language !== currentLanguage && (
               <Button
                 key={language}
                 fullWidth={false}
@@ -67,13 +63,11 @@ function App() {
               </Button>
             ))}
         </header>
-
-        <img src={images.logo} alt="Logo" />
+        <div> <img src={images.logo} alt="Logo" className="h-10 w-auto" /></div>
 
         <main className="flex-1">
           <Routes>
             <Route element={<Home />} path="/" />
-            <Route element={<Status />} path="/status" />
             <Route element={<UIShowcase />} path="/ui" />
             <Route element={<NotFound />} path="*" />
           </Routes>

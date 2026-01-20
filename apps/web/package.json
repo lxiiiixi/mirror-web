@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@mirror/assets": "workspace:*",
+    "@mirror/locales": "workspace:*",
     "i18next": "^25.7.4",
     "i18next-browser-languagedetector": "^8.2.0",
     "react": "19.1.0",

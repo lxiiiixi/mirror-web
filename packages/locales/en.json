@@ -1,0 +1,552 @@
+{
+  "header": {
+    "assets": "Assets",
+    "connect": "Connect",
+    "language": "English",
+    "invites": "Invites",
+    "wallet": "Wallet"
+  },
+  "banners": [
+    {
+      "img": "/static/images/home/banner2/banner1.png",
+      "link": ""
+    },
+    {
+      "img": "/static/images/home/banner2/banner2.png",
+      "link": ""
+    },
+    {
+      "img": "/static/images/home/banner2/banner3.png",
+      "link": ""
+    },
+    {
+      "img": "/static/images/home/banner2/banner4.png",
+      "link": ""
+    },
+    {
+      "img": "/static/images/home/banner2/banner5.png",
+      "link": ""
+    }
+  ],
+  "works": {
+    "filterTagDialog": {
+      "title": "All Channels",
+      "rating": "Rating",
+      "popularity": "Popularity",
+      "channels": "Channels",
+      "all": "ALL",
+      "types": {
+        "tvDrama": "TV Drama",
+        "playlet": "Playlet",
+        "animation": "Animation",
+        "vlog": "Vlog",
+        "comic": "Comic",
+        "music": "Music",
+        "novel": "Novel",
+        "animatedFilm": "Animated Film",
+        "movie": "Movie"
+      }
+    },
+    "tokenFilter": {
+      "metaToken": "Token",
+      "ticketToken": "Ticket"
+    },
+    "detail": {
+      "communityOpened": "Promotion opened successfully",
+      "chapterContents": "Chapter table of contents:",
+      "previousPage": "Previous page",
+      "nextPage": "Next page"
+    },
+    "unlockChapterDialog": {
+      "title": "Unlocked chapters",
+      "purchasePrompt": "Please purchase before watching subsequent chapters, {price} {label} for one chapter",
+      "paymentMethod": "Payment method",
+      "chapters": "Chapters",
+      "pay": "Pay {totalPrice} {label}",
+      "inviteToEarn": "Invite to earn token",
+      "rechargeUsdt": "Recharge USDT",
+      "comingSoon": "Coming Soon",
+      "purchaseSuccess": "Purchase successful",
+      "purchaseFailed": "Purchase failed"
+    },
+    "externalLink": {
+      "add": "Add external link"
+    },
+    "productShare": {
+      "fundraisingTarget": "Fundraising target",
+      "price": "Price: 1 {tokenName} = {price} SOL",
+      "buy": "Buy {buyNum} SOL",
+      "pledgeInfo": "{percentage}% of the total Metaverse token will be pledged to SWAP and burned",
+      "checkRecord": "< Check Record",
+      "initiator": "Initiator : {creatorId}",
+      "checked": "Checked",
+      "checkIn": "Check in",
+      "initiatingTge": "Initiating TGE",
+      "retweetReward": "Retweet the link to X, <br />Reward <b class=\"red-text\">5 tokens</b> for each successful invitation",
+      "xForward": "X Forward",
+      "invitedPpl": "Invited {inviteNum} ppl",
+      "copySuccess": "Copy Success"
+    },
+    "invitedListDialog": {
+      "title": "Invitation list",
+      "wallet": "Wallet",
+      "invitationTime": "Invitation time",
+      "noData": "No Data"
+    }
+  },
+  "ticket": {
+    "tabs": {
+      "theFirst": "The First",
+      "onConsignment": "Market"
+    },
+    "empty": "Empty",
+    "ticketItemCard": {
+      "countDown": "CountDown",
+      "buy": "Purchase",
+      "nobuy": "Purchase limit",
+      "soldOut": "Sold out",
+      "presale": "Pre-sale",
+      "waiting_presale": "Waiting Start",
+      "waiting_buy": "Waiting Purchase",
+      "notStarted": "Not started",
+      "numberOfIssues": "Circulation",
+      "numberOfOrder": "Number of order",
+      "copies": "Copies",
+      "freeStorage": "Rising days",
+      "day": "Day",
+      "salePrice": "Sale price",
+      "buyPrice": "Buy price",
+      "offerPrice": "Issue price",
+      "nextTime": "Available in {time} minutes",
+      "price": "Price",
+      "profitLoss": "Increase",
+      "quantity": "Quantity",
+      "sell": "Launch",
+      "sellDown": "Take Down",
+      "back": "Back",
+      "sell_down": "Automatic delisting in {time} ",
+      "sell_up": "Available for listing at {time} ",
+      "sell_time_tip1": "Pre-sale Time：{time}",
+      "sell_time_tip2": "Sale Time：{time1}-Tomorrow {time2}",
+      "sell_info1": "{n} put on sale",
+      "sell_info2": "upcycle for {d} days",
+      "presale_user": "{n} are Snap up"
+    },
+    "detail": {
+      "releaseProcess": "Release Process",
+      "priorityPurchase": "Priority Purchase",
+      "purchase": "Purchase",
+      "issuePrice": "Issue Price",
+      "currentPrice": "Current Price",
+      "totalSupply": "Total Supply",
+      "remaining": "Remaining",
+      "launchTime": "Launch Time",
+      "introduction": "Introduction"
+    },
+    "record": {
+      "pay": "Final Payment",
+      "presale": "Ticket Deposit",
+      "direct": "Direct Bonus",
+      "indirect": "Indirect Bonus"
+    },
+    "buyDialog": {
+      "title": "Buy Ticket",
+      "waitingForPayment": "Waiting for payment...",
+      "paymentProcessing": "Payment is being processed...",
+      "paymentSuccessful": "Payment successful!",
+      "paymentFailed": "Payment failed. Please try again.",
+      "close": "Close",
+      "currentPrice": "Current Price",
+      "issuePrice": "Issue Price",
+      "maxPurchasable": "Maximum number of copies that can be purchased:",
+      "buy": "BUY",
+      "viewMine": "Check out my"
+    },
+    "whitelistPurchase": "Purchase",
+    "buyConsignmentDialog": {
+      "title": "Buy ticket",
+      "currentBuyPrice": "Current buy price",
+      "usdt": "USDT",
+      "buy": "Buy",
+      "purchaseSuccess": "Purchase successful"
+    },
+    "sellTicketDialog": {
+      "title": "Collection sales",
+      "currentSellingPrice": "Current selling price",
+      "commissionTips": "{d} commission will be deducted from the profit",
+      "usdt": "USDT",
+      "sell": "SELL",
+      "consignmentSuccess": "Consignment successful",
+      "sellCount": "Sell {count} tickets",
+      "purchasePrice": "Purchase",
+      "currentPrice": "Current",
+      "purchaseTime": "Time",
+      "back": "Back"
+    },
+    "presaleDialog": {
+      "title": "Participate in Presale",
+      "registered": "Registered",
+      "payPrompt": "Pay {amount} USDT to participate in presale",
+      "participate": "Participate"
+    },
+    "alreadyReserved": "Already reserved",
+    "participatePresale": "Presale"
+  },
+  "promotion": {
+    "bindSuperior": "Bind the superior",
+    "subTitle": "Recommend VIP to enjoy 10-15% commission",
+    "promotion": "Community",
+    "directCommission": "Direct commission 10%:",
+    "indirectCommission": "Indirect commission 5%:",
+    "todaysCommission": "Today's commission",
+    "cumulativeCommission": "Cumulative commission",
+    "tipText": "Claim a token that will increase a hundredfold Double the airdrop when three people form a team"
+  },
+  "vipAbout": {
+    "whitePaper": "white paper",
+    "cardTitle": "EntertainFl Club VIP Privileges",
+    "newbieWhite": "Newbie White:",
+    "newbieWhiteDesc": "Online clubs, RWA rewards and activities",
+    "potentialPlayers": "Potential Players:",
+    "potentialPlayersDesc": "Early access to products and white list",
+    "trendsetters": "Trendsetters:",
+    "trendsettersDesc": "Offline DAO, voting on key decisions",
+    "trendsett ersDesc": "Offline DAO, voting on key decisions",
+    "industryKOC": "Industry KOC:",
+    "industryKOCDesc": "Share profits based on mining machine holdings",
+    "topOGs": "Top OGs:",
+    "topOGsDesc": "Priority access to 3-year RWA investment",
+    "joinTitle": "Join club receive mining machine ",
+    "payButton": "Pay 1000 USDT to join VIP",
+    "giftedNodes": "Gifted mining machine",
+    "totalMiningCapacity": "Total mining capacity",
+    "currentLimit": "Currently, there is a limit of 4000.",
+    "dailyOutputPerNode": "Daily output per mining machine: 833 ENT",
+    "acceleratedRelease": "Accelerated release: 35%",
+    "oneVipGiftNode": "1 VP gift node: 1",
+    "twentyVipGiftNodes": "20 VP aift mining machine: 20 +2",
+    "tableHeaders": {
+      "vips": "VIPS",
+      "giftedNodes": "Gifted mining machine",
+      "additionalNodes": "Additional mining machine"
+    }
+  },
+  "vipMining": {
+    "validUsers": "Valid users:",
+    "numberOfVips": "Number of VlPs :",
+    "comingSoon": "Coming soon",
+    "maximumClaimable": "Maximum claimable:"
+  },
+  "footer": {
+    "entertainFI": "EntertainFI",
+    "home": "VIP",
+    "kol": "Promotion"
+  },
+  "home": {
+    "tokenCard": {
+      "vip": "EntertainFI Club VIP",
+      "ticket": "Ticket TOKEN"
+    }
+  },
+  "tokenItemCard": {
+    "person": "Person:",
+    "checkIn": "Airdrop",
+    "checkInSuccess": "Check-in successful",
+    "airDrop": "Air drop",
+    "progress": "Progress:",
+    "balance": "balance"
+  },
+  "account": {
+    "balanceTotal": "Total Value {d}",
+    "refresh": "Refresh",
+    "ent": "ENT",
+    "rwa_token": "USDT quantity",
+    "rwa_ticket": "ART quantity",
+    "today": "Today's earnings",
+    "copy": "Copy",
+    "copySu": "The address has been successfully copied",
+    "address": "Linked wallet",
+    "token": "Hold RWA Token",
+    "bill": "My bill",
+    "ticket": "Hold ticket",
+    "mint": "MINT",
+    "agentRole": "My Club",
+    "invites": "Invites",
+    "claim": "claim",
+    "ticketToken": "Ticket-Token",
+    "metaToken": "IP Token",
+    "login": "Login",
+    "logout": "Logout",
+    "billing": "Billing",
+    "withdrawDialog": {
+      "title": "Recharge",
+      "title1": "Recharge and withdrawal",
+      "currentMax": "Current : {num}",
+      "confirm": "Withdrawal",
+      "selectCurrency": "Please select currency",
+      "recharge_currency": "Recharge Currency",
+      "withdraw_currency": "WithDraw Currency",
+      "recharge_number": "Recharge Quantity ",
+      "withdraw_number": "WithDraw Quantity",
+      "recharge_btn": "Submit a recharge",
+      "withdraw_btn": "Submit a withdraw",
+      "currency": "Currency",
+      "claimInterval": "The deposited value is credited in seconds, and the withdrawal will be credited within 1 hour during the day. You can apply for it every ten minutes. The withdrawal fee is 10%",
+      "claimInterval2": "The deposited value is credited in seconds, the withdrawal will be credited within 1 hour, the withdrawal fee will be credited 0",
+      "rechargeAddress": "Recharge Address:{d}",
+      "success": "Withdrawal successful!",
+      "currentHash": "Current transaction hash:",
+      "complete": "Complete",
+      "placeholder": "Please enter the quantity(10% handling fee)",
+      "copySuccess": "Copy success",
+      "deposit": "Recharge",
+      "depositSuccess": "Recharge successful!"
+    }
+  },
+  "ticketStatus": {
+    "waitingForDraw": "Participating",
+    "sell": "Selling",
+    "drawFailed": "Draw failed",
+    "purchased": "Lottery"
+  },
+  "layout": {
+    "myClub": "My Club"
+  },
+  "miningAbout": {
+    "pageTitle": "EntertainFI Club",
+    "joinClub": "Join the EntertainFI Club",
+    "privilegesIntroduction": "ENTERTAINFICLUB PRIVILEGES INTRODUCTION",
+    "giftAgentNodes": "JOIN THE ENTERTAINFI CLUB VIP — GIFT AGENT MINING MACHINE",
+    "vip1": "VIP1: Online club, RWA rewards & events",
+    "vip2": "VIP2: Early access to products & whitelists",
+    "vip3": "VIP3: Offline DAO, vote on key decisions",
+    "vip4": "VIP4: Profit sharing by mining machine holdings",
+    "vip5": "VIP5: 3-year RWA investment priority",
+    "inviteFriends": "Invite friends Join the EntertainFI Club VIP",
+    "dataDetails": "GIFT AGENT MINING MACHINES DATA DETAILS",
+    "totalMineable": "Total Mineable",
+    "nodesLimit": "Limited to 2000 mining machines for now",
+    "totalHashrate": "Total Hashrate",
+    "fixedHashrate": "FIXED HASHRATE(1500A)",
+    "variableHashrate": "VARIABLE HASHRATE(1500A)",
+    "notAvailable": "Not Available",
+    "overallyDaily": "Overally Daily",
+    "miningPrice": "Mining Price",
+    "accelerateRelease": "Accelerate release",
+    "invitation": "Invitation discount",
+    "invitation_discount": "Purchase mining machines at a 30% to 50% discount",
+    "entInitialPrice": "ENT Initial Price",
+    "agentNode": "Agent Mining Machine",
+    "acceleratedComputingPowerNote": "(After 200 mining machines, the accelerated computing power will be activated.)",
+    "getEntOff": "Get ENT at 30% ~ 50% off",
+    "variableHashrateTable": "Variable Hashrate Table",
+    "workLevelInfo": "The work level is determined based on the historical ranking of \"Contribution Factor\".",
+    "contributionCoefficient": "Contribution coeffcient",
+    "rank": "Rank",
+    "factor": "Factor",
+    "worksMiningIndex": "Works Mining Index:",
+    "experienceValueInfo": "The experience value is calculated as the duration of exclusive cooperation multiplied by the base number for mining the work; exclusive works count as 1. if a non-exclusive work becomes exclusive within a month, it counts as 0.66, decreasing by 0.03 every additional month. After 12 months, the value for creating an exclusive work is 0.3",
+    "channelNftLevel": "Channel NFT level",
+    "level": "Level",
+    "experienceValueIncrease": "Experience Value Increase",
+    "multipliers": "Multipliers"
+  },
+  "miningIndex": {
+    "pageTitle": "EntertainFI Club",
+    "clubName": "ENTERTAINFI CLUB :",
+    "currentPromotion": "Current Promotion：Every VIP Membership Gift a ENT Ecosystem  Mining Machine!",
+    "priceIncreaseNote": "For every 100VIPs sold, the unit price will automatically increase by 10USDT.",
+    "currentVipPrice": "Current VIP Price: {price} USDT",
+    "complimentaryNode": "Every VIP Membership includes a complimentary ENT Ecosystem  Mining Machine!",
+    "selectVipQuantity": "Select VIP Quantity",
+    "totalPayment": "Your total payment will be {price}U , Gift {quantity} ENT Ecosystem  Mining Machines",
+    "extraGiftNodes": "{count} additional mining machines are given as a gift",
+    "dataDetails": "Gift Mining Machines Data Details",
+    "totalMineable": "Total Mineable:",
+    "fixedHashrate": "Fixed Hashrate:",
+    "variableHashrate": "Variable Hashrate:",
+    "notAvailable": "Not Available",
+    "overallDailyOutput": "Overall Daily Output:",
+    "nodeQuantity": "Mining Machine Quantity:",
+    "accelerateRelease": "Accelerate release:",
+    "acceleratedComputingPowerNote": "(After 200 Mining Machines, the accelerated computing power will be activated.)",
+    "entInitialPrice": "ENT Initial Price:",
+    "agentNode": "Mining Machine:",
+    "getEntOff": "Get ENT at 30% ~ 50% off",
+    "connectSolanaWallet": "Connect Solana Wallet",
+    "processing": "Processing...",
+    "buy": "{price} USDT BUY",
+    "comingSoon": "Coming Soon",
+    "waitingForPayment": "Waiting for payment...",
+    "queryTxResult": "Query transaction results...",
+    "paymentError": "Something went wrong, but it doesn’t mean the payment failed. You can go to the “My Records” page to check if the payment was successful.",
+    "myRecords": "My Records",
+    "pleaseConnectSolana": "Please connect Solana wallet first !",
+    "orderCreateSuccess": "Order created successfully !",
+    "orderCreateFailed": "Order creation failed !",
+    "walletTxFailed": "Wallet transaction failed !",
+    "waitingForResult": "Waiting for result...",
+    "orderPaidSuccess": "Order paid successfully !",
+    "waitForChainConfirmation": "Please wait patiently for on-chain confirmation, do not perform other operations"
+  },
+  "agntDialog": {
+    "title": "EntertainFI Club",
+    "joinVip": "Join the EntertainFI Club VIP",
+    "joinVipDesc": "Join the EntertainFI Club as a VIP — Buy a VIP Membership and Get a FREE ENT Mining Machines!Enjoy exclusive token mining rights！",
+    "giftNodeDesc": "GIFT Mining Machine<br />Release: 20% in Year 1, decreases 20% per year",
+    "v1": "v1:<br />Join the online club to participate in regular Entertainment RWA airdrops and benefit-driven events.",
+    "v2": "v2:<br />Get priority access to new product testing, premium entertainment content, and whitelists for partner projects.",
+    "v3": "v3:<br />Join the offline club to participate in major club decision-making and enjoy DAO governance rights.",
+    "v4": "v4:<br />Enjoy exclusive entertainment events and share in event revenues through Mining Machine-based dividend distribution.",
+    "v5": "v5:<br />Gain early investment and priority exit rights for ecosystem RWA products, valid for 3 years. After 3 years, continued access is subject to approval."
+  },
+  "paySuccDialog": {
+    "title": "Successful",
+    "paymentSuccess": "Payment is successful, click {myRecords} to jump",
+    "myRecords": "My Member"
+  },
+  "miningMy": {
+    "pageTitle": "My Club",
+    "introduction": "Introduction",
+    "clubVip": "EntertainFI Club VIP",
+    "buyVip": "Buy VIP",
+    "inviteAndEarn": "Invite friends and earn commission!",
+    "sharedUsers": "Effective direct users:",
+    "dataDetails": "Gift Mining Machine",
+    "purchasedNode": "Number of Mining Machines :",
+    "currentHashrate": "Current Hashrate:",
+    "fixedHashrate": "Fixed power :",
+    "notAvailable": "(Not Available)",
+    "accelerateRelease": "Accelerate :",
+    "acceleratedComputingPowerNote": "(291 ENTs are given out every day)",
+    "miningPrice": "Initial Price:",
+    "comingSoon": "Coming soon",
+    "speedUp": "SPEED UP",
+    "totalMined": "Today Total Revenue",
+    "totalWithdrawn": "Total Withdrawn ENT",
+    "extractable": "Claim mining ENT: 10% handling fee",
+    "claim": "Claim",
+    "releaseInfo": "A total of 6 billion ENT Mining Machines were built, 20% is released in the first year, with a 20% annual decrease thereafter",
+    "todaysMiningData": "Daily earnings",
+    "dailyEarnings": "Accumulated daily fixed income",
+    "directEarnings": "Today  Cumulative community income",
+    "dividendEarnings": "Today Accumulated contributions",
+    "destructionEarnings": "Today Cumulative destruction income"
+  },
+  "miningInvites": {
+    "pageTitle": "My Invite",
+    "invites": "Community Team",
+    "level1": "Direct:",
+    "level2": "Delay:",
+    "leader": "Leader",
+    "gold": "Gold"
+  },
+  "miningRecords": {
+    "pageTitle": "Billing history",
+    "income": "Income",
+    "expenditure": "Expenditure",
+    "date": "DATE",
+    "id": "ID",
+    "quantity": "QUANTITY",
+    "amount": "AMOUNT",
+    "status": "STATUS",
+    "pending": "Pending",
+    "success": "Success",
+    "cancelled": "Cancelled",
+    "payVip": "Pay {amount} USDT to buy {num} VIP",
+    "payTicket": "Pay {amount} USDT to buy {ticketName}",
+    "transactionStatus": "Transaction: {status}"
+  },
+  "miningTabs": {
+    "myClub": "My Club",
+    "myInvites": "Accelerated",
+    "myRecords": "My Records"
+  },
+  "projectTabs": {
+    "vip": "VIP",
+    "node": "Community",
+    "myMining": "Member"
+  },
+  "recordTabs": {
+    "vip": "EntertainFI Club VIP",
+    "ticketToken": "Ticket Token"
+  },
+  "totalRevenue": {
+    "entTotalRevenue": "Accumulated coin production income",
+    "dailyRevenue": "Accumulated community benefits",
+    "teamRevenue": "Cumulative's Contribution",
+    "destructionRevenue": "Destroy Cumulative's profits",
+    "directSalesRevenue": "Cumulative's Community benefits",
+    "notOpen": "Not open",
+    "claim": "Claim"
+  },
+  "vipRulesDialog": {
+    "title": "VIP rules introduction",
+    "rule": "Rule >",
+    "v1": "V1: EntertainFI ViP+1",
+    "v2": "V2: Direct promotion: 5 V1",
+    "v3_1": "V3: Direct promotion: 2 V2",
+    "v3_2": "30 valid users",
+    "v4_1": "V4: Direct promotion: 2 V3",
+    "v4_2": "100 valid users",
+    "v5_1": "V5: Direct promotion: 2 V4",
+    "v5_2": "300 valid users"
+  },
+  "miningShare": {
+    "pageTitle": "Invites",
+    "rewardTitle": "10% direct, 5% indirect reward",
+    "idLabel": "ID :",
+    "level1Invites": "Level 1 invites:",
+    "level2Invites": "Level 2 invites:",
+    "shareLink": "Share Link",
+    "savePoster": "Save Poster",
+    "sharingNotAvailable": "Sharing is not yet available",
+    "copiedSuccess": "Copied successfully !",
+    "xShareTitle": "Buy EntertainFI VIP — Get an Agent Mining Machine for FREE!",
+    "generating": "Generating...",
+    "downloading": "Downloading...",
+    "permissionDenied": "Permission Denied",
+    "permissionContent": "Please grant permission to save images in settings.",
+    "saveFailed": "Failed to save"
+  },
+  "newsData": [
+    {
+      "username": "Mirror",
+      "pic": "/static/images/discover/d1.png",
+      "content": "Buy EntertainFI VIP — Get an Agent Mining Machine for GIFT! VIP Membership 1000 USDT, let‘s GO!",
+      "time": "2025.06.30"
+    },
+    {
+      "username": "Mirror",
+      "pic": "/static/images/discover/d2.png",
+      "content": "Received a funding support of HKD 2.6 million from the Hong Kong government's Cyberport.",
+      "time": "2025.03.26"
+    },
+    {
+      "username": "Mirror",
+      "pic": "/static/images/discover/d3.png",
+      "content": "mirror.fan: Web3 RWA Platform for Entertainment. It turns films, comics, music, and novels into RWA tokens on the blockchain. It helps IPs build on-chain ecosystems and monetize fan engagement through limited content tickets and merchandise. Bringing mainstream entertainment into Web3.",
+      "time": "2024.06.23"
+    }
+  ],
+  "hold_token": {
+    "title": "Hold Tokens"
+  },
+  "hold_ticket": {
+    "title": "Hold Ticket"
+  },
+  "assets": {
+    "title": "Assets",
+    "typeAll": "All",
+    "typeTicket": "Ticket",
+    "typeVip": "VIP",
+    "typeMining": "Mining",
+    "typeAirdrop": "Airdrop",
+    "typeRecharge": "Recharge",
+    "typeWithdraw": "Withdraw"
+  },
+  "notice": {
+    "title": "Notice",
+    "defaultMessage": "Blessed with good luck, tickets come at your fingertips! Good luck to you"
+  }
+}
