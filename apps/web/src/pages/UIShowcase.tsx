@@ -9,6 +9,8 @@ import {
   ProductCard,
   ProductCardCarousel,
   ProductData,
+  Banner,
+  BannerItem,
 } from '../ui'
 
 /**
@@ -31,6 +33,7 @@ function UIShowcase() {
     modal: true,
     features: true,
     productCard: true,
+    banner: true,
   })
 
   // ProductCard 示例数据
@@ -79,6 +82,44 @@ function UIShowcase() {
 
   const handleShareToX = (product: ProductData) => {
     alert(`分享到 X：${product.name}`)
+  }
+
+  // Banner 示例数据
+  const sampleBanners: BannerItem[] = [
+    {
+      id: 1,
+      img: 'https://picsum.photos/seed/banner1/534/258',
+      link: '/page1',
+      alt: 'Banner 1',
+    },
+    {
+      id: 2,
+      img: 'https://picsum.photos/seed/banner2/534/258',
+      link: '/page2',
+      alt: 'Banner 2',
+    },
+    {
+      id: 3,
+      img: 'https://picsum.photos/seed/banner3/534/258',
+      link: '/page3',
+      alt: 'Banner 3',
+    },
+    {
+      id: 4,
+      img: 'https://picsum.photos/seed/banner4/534/258',
+      link: '/page4',
+      alt: 'Banner 4',
+    },
+    {
+      id: 5,
+      img: 'https://picsum.photos/seed/banner5/534/258',
+      link: '/page5',
+      alt: 'Banner 5',
+    },
+  ]
+
+  const handleBannerClick = (banner: BannerItem) => {
+    alert(`点击了 Banner: ${banner.alt}`)
   }
 
   // 切换 section 的展开/折叠状态
@@ -486,6 +527,47 @@ function UIShowcase() {
                 onShareToX={handleShareToX}
                 autoplay={true}
                 autoplayInterval={5000}
+              />
+          </div>
+        </div>
+      </section>
+
+      {/* Banner 组件展示 */}
+      <section className="space-y-6">
+        <div
+          className="cursor-pointer select-none"
+          onClick={() => toggleSection('banner')}
+        >
+          <div className="flex items-center justify-between">
+            <h3 className="text-xl font-semibold text-white">Banner 轮播组件</h3>
+            <span
+              className={`text-white transition-transform duration-300 ${
+                expandedSections.banner ? 'rotate-180' : ''
+              }`}
+            >
+              ▼
+            </span>
+          </div>
+          <p className="mt-1 text-sm text-[--color-text-muted]">
+            2D 堆叠轮播效果，支持触摸滑动和自动播放
+          </p>
+        </div>
+
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            expandedSections.banner ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          {/* Banner 轮播 */}
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-200">
+              2D 堆叠轮播效果
+            </h4>
+              <Banner
+                banners={sampleBanners}
+                autoplay={true}
+                interval={6000}
+                onCardClick={handleBannerClick}
               />
           </div>
         </div>
