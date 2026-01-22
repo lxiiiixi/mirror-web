@@ -2,15 +2,14 @@ import { useState } from 'react'
 import {
   Button,
   Card,
-  Input,
   Modal,
   Spinner,
-  Tabs,
   ProductCard,
   ProductCardCarousel,
   ProductData,
   Banner,
   BannerItem,
+  Notice,
 } from '../ui'
 
 /**
@@ -34,6 +33,7 @@ function UIShowcase() {
     features: true,
     productCard: true,
     banner: true,
+    notice: true,
   })
 
   // ProductCard 示例数据
@@ -122,6 +122,10 @@ function UIShowcase() {
     alert(`点击了 Banner: ${banner.alt}`)
   }
 
+  const handleNoticeJump = () => {
+    alert('跳转到公告详情页')
+  }
+
   // 切换 section 的展开/折叠状态
   const toggleSection = (sectionId: string) => {
     setExpandedSections((prev) => ({
@@ -191,60 +195,6 @@ function UIShowcase() {
               </span>
             </div>
           </div>
-
-          {/* 不同尺寸 */}
-          <div className="mt-4 space-y-4">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-200">
-              按钮尺寸
-            </h4>
-            <div className="flex flex-wrap items-center gap-4 rounded-3xl border border-white/10 bg-white/5 p-6">
-              <Button variant="primary" size="small">
-                小按钮
-              </Button>
-              <Button variant="primary" size="medium">
-                中等按钮
-              </Button>
-              <Button variant="primary" size="large">
-                大按钮
-              </Button>
-            </div>
-          </div>
-
-          {/* 圆角按钮 */}
-          <div className="mt-4 space-y-4">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-200">
-              圆角按钮
-            </h4>
-            <div className="flex flex-wrap items-center gap-4 rounded-3xl border border-white/10 bg-white/5 p-6">
-              <Button variant="primary" rounded>
-                主题圆角
-              </Button>
-              <Button variant="secondary" rounded>
-                次要圆角
-              </Button>
-              <Button variant="primary" rounded size="small">
-                小圆角
-              </Button>
-              <Button variant="primary" rounded size="large">
-                大圆角
-              </Button>
-            </div>
-          </div>
-
-          {/* 全宽按钮 */}
-          <div className="mt-4 space-y-4">
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-200">
-              全宽按钮
-            </h4>
-            <div className="space-y-3 rounded-3xl border border-white/10 bg-white/5 p-6">
-              <Button variant="primary" fullWidth>
-                主题全宽按钮
-              </Button>
-              <Button variant="secondary" fullWidth>
-                次要全宽按钮
-              </Button>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -293,96 +243,6 @@ function UIShowcase() {
               用于承载表单或列表的基础容器。
             </p>
           </Card>
-        </div>
-      </section>
-
-      {/* Input 组件展示 */}
-      <section className="space-y-6">
-        <div
-          className="cursor-pointer select-none"
-          onClick={() => toggleSection('input')}
-        >
-          <div className="flex items-center justify-between">
-            <h3 className="text-xl font-semibold text-white">Input 输入组件</h3>
-            <span
-              className={`text-white transition-transform duration-300 ${
-                expandedSections.input ? 'rotate-180' : ''
-              }`}
-            >
-              ▼
-            </span>
-          </div>
-          <p className="mt-1 text-sm text-[--color-text-muted]">
-            圆角输入框与辅助文案，贴近旧版表单风格
-          </p>
-        </div>
-        <div
-          className={`grid gap-5 md:grid-cols-2 overflow-hidden transition-all duration-300 ${
-            expandedSections.input ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
-          }`}
-        >
-          <Input
-            label="邮箱地址"
-            type="email"
-            placeholder="name@mirror.fan"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            helperText="用于接收活动通知"
-            fullWidth
-          />
-          <Input
-            label="邀请码"
-            placeholder="MIRROR-2024"
-            error="邀请码格式错误"
-            fullWidth
-          />
-        </div>
-      </section>
-
-      {/* Tabs 组件展示 */}
-      <section className="space-y-6">
-        <div
-          className="cursor-pointer select-none"
-          onClick={() => toggleSection('tabs')}
-        >
-          <div className="flex items-center justify-between">
-            <h3 className="text-xl font-semibold text-white">Tabs 标签切换</h3>
-            <span
-              className={`text-white transition-transform duration-300 ${
-                expandedSections.tabs ? 'rotate-180' : ''
-              }`}
-            >
-              ▼
-            </span>
-          </div>
-          <p className="mt-1 text-sm text-[--color-text-muted]">
-            支持下划线与胶囊两种风格
-          </p>
-        </div>
-        <div
-          className={`space-y-6 rounded-3xl border border-white/10 bg-white/5 p-6 overflow-hidden transition-all duration-300 ${
-            expandedSections.tabs ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
-          }`}
-        >
-          <Tabs
-            items={[
-              { value: 'overview', label: '总览' },
-              { value: 'assets', label: '资产' },
-              { value: 'rewards', label: '收益' },
-            ]}
-            value={activeTab}
-            onChange={setActiveTab}
-          />
-          <Tabs
-            items={[
-              { value: 'overview', label: '总览' },
-              { value: 'assets', label: '资产' },
-              { value: 'rewards', label: '收益' },
-            ]}
-            value={activeTab}
-            onChange={setActiveTab}
-            variant="pill"
-          />
         </div>
       </section>
 
@@ -508,12 +368,6 @@ function UIShowcase() {
                 />
               ))}
             </div>
-            <div className="text-xs text-[--color-text-muted] mt-2">
-              <p>• 小尺寸卡片 (110px × 160px)</p>
-              <p>• 显示作品封面、标题、作者</p>
-              <p>• 支持分享到 X 功能</p>
-              <p>• 显示作品类型标签</p>
-            </div>
           </div>
 
           {/* 轮播产品卡片 */}
@@ -568,6 +422,42 @@ function UIShowcase() {
                 autoplay={true}
                 interval={6000}
                 onCardClick={handleBannerClick}
+              />
+          </div>
+        </div>
+      </section>
+
+      {/* Notice 组件展示 */}
+      <section className="space-y-6">
+        <div
+          className="cursor-pointer select-none"
+          onClick={() => toggleSection('notice')}
+        >
+          <div className="flex items-center justify-between">
+            <h3 className="text-xl font-semibold text-white">Notice 公告组件</h3>
+            <span
+              className={`text-white transition-transform duration-300 ${
+                expandedSections.notice ? 'rotate-180' : ''
+              }`}
+            >
+              ▼
+            </span>
+          </div>
+          <p className="mt-1 text-sm text-[--color-text-muted]">
+            跑马灯效果的公告通知条
+          </p>
+        </div>
+
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            expandedSections.notice ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          {/* 基础公告 */}
+          <div className="space-y-4 max-w-[375px]">
+              <Notice
+                message="🎉 Welcome to Mirror! Join our community and explore amazing content!"
+                onJump={handleNoticeJump}
               />
           </div>
         </div>
