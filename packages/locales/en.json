@@ -1,10 +1,15 @@
 {
   "header": {
     "assets": "Assets",
-    "connect": "Connect",
+    "login": "Login",
     "language": "English",
     "invites": "Invites",
     "wallet": "Wallet"
+  },
+  "loginModal": {
+    "title": "Login method",
+    "wallet": "Wallet Login",
+    "email": "Email Login"
   },
   "banners": [
     {

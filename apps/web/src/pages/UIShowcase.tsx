@@ -611,6 +611,7 @@ function UIShowcase() {
           }`}
         >
             <CoefficientTable
+              title="Coefficient Table"
               theadHeaders={coefficientHeaders}
               theadHeaderKeys={coefficientKeys}
               data={coefficientRows}

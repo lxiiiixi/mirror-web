@@ -1,10 +1,15 @@
 {
   "header": {
     "assets": "資產",
-    "connect": "連接",
+    "login": "登錄",
     "language": "繁體",
     "invites": "邀請",
     "wallet": "錢包"
+  },
+  "loginModal": {
+    "title": "登錄方式",
+    "wallet": "錢包登錄",
+    "email": "郵箱登錄"
   },
   "banners": [
     {

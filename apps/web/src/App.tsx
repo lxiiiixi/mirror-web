@@ -1,18 +1,21 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import useMediaQuery from './hooks/useMediaQuery'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import UIShowcase from './pages/UIShowcase'
 import { AppLayout } from './ui'
 import { images } from '@mirror/assets'
+import { LoginModal } from './components/LoginModal'
+import { useLoginModalStore } from './store/useLoginModalStore'
 
 function App() {
   const { t, i18n } = useTranslation()
   const isDesktop = useMediaQuery('(min-width: 1024px)')
   const navigate = useNavigate()
   const location = useLocation()
+  const openLoginModal = useLoginModalStore((state) => state.openModal)
 
   // 桌面端自动重定向到白皮书网站
   useEffect(() => {
@@ -24,14 +27,6 @@ function App() {
   useEffect(() => {
     document.documentElement.lang = i18n.resolvedLanguage ?? 'en'
   }, [i18n.resolvedLanguage])
-
-  const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    [
-      'rounded-full border px-4 py-2 text-sm font-semibold transition',
-      isActive
-        ? 'border-slate-900 bg-slate-900 text-white shadow shadow-slate-900/20'
-        : 'border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-900',
-    ].join(' ')
 
   const currentLanguage = i18n.resolvedLanguage ?? 'en'
   const activeFooterIndex = location.pathname.startsWith('/ui') ? 1 : 0
@@ -69,13 +64,13 @@ function App() {
       showPageNav={false}
       languageLabel={t('header.language')}
       assetsLabel={t('header.assets')}
-      loginLabel={t('header.connect')}
+      loginLabel={t('header.login')}
       isLoggedIn={false}
       onLanguageClick={() =>
         i18n.changeLanguage(currentLanguage === 'en' ? 'zh-hk' : 'en')
       }
       onLogoClick={() => navigate('/')}
-      onWalletClick={() => navigate('/')}
+      onWalletClick={openLoginModal}
       footerItems={footerItems}
       activeFooterIndex={activeFooterIndex}
     >
@@ -88,6 +83,7 @@ function App() {
           </Routes>
         </main>
       </div>
+      <LoginModal />
     </AppLayout>
   )
 }
