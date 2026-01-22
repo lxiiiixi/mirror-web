@@ -13,6 +13,7 @@ import {
   Notice,
   TicketItemCard,
   ProjectTabs,
+  CoefficientTable,
 } from '../ui'
 
 /**
@@ -40,6 +41,7 @@ function UIShowcase() {
     notice: true,
     ticketItemCard: true,
     projectTabs: true,
+    coefficientTable: true,
   })
 
   // ProductCard 示例数据
@@ -149,6 +151,14 @@ function UIShowcase() {
       label: 'Node',
       iconSrc: images.home.tokenTab2,
     },
+  ]
+
+  const coefficientHeaders = ['Level', 'Power', 'Coefficient']
+  const coefficientKeys = ['level', 'power', 'coefficient']
+  const coefficientRows = [
+    { level: 'L1', power: '0 - 100', coefficient: '1.0x' },
+    { level: 'L2', power: '101 - 300', coefficient: '1.2x' },
+    { level: 'L3', power: '301 - 600', coefficient: '1.5x' },
   ]
 
   // 切换 section 的展开/折叠状态
@@ -542,6 +552,40 @@ function UIShowcase() {
               tabs={projectTabs}
               activeIndex={activeProjectTab}
               onChange={(index) => setActiveProjectTab(index)}
+            />
+        </div>
+      </section>
+
+      {/* CoefficientTable 组件展示 */}
+      <section className="space-y-6">
+        <div
+          className="cursor-pointer select-none"
+          onClick={() => toggleSection('coefficientTable')}
+        >
+          <div className="flex items-center justify-between">
+            <h3 className="text-xl font-semibold text-white">CoefficientTable 表格</h3>
+            <span
+              className={`text-white transition-transform duration-300 ${
+                expandedSections.coefficientTable ? 'rotate-180' : ''
+              }`}
+            >
+              ▼
+            </span>
+          </div>
+          <p className="mt-1 text-sm text-[--color-text-muted]">
+            简洁的挖矿系数表格样式
+          </p>
+        </div>
+
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            expandedSections.coefficientTable ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+            <CoefficientTable
+              theadHeaders={coefficientHeaders}
+              theadHeaderKeys={coefficientKeys}
+              data={coefficientRows}
             />
         </div>
       </section>
