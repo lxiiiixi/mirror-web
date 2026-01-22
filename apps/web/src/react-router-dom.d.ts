@@ -15,6 +15,7 @@ declare global {
 // 重新声明 react-router-dom 模块以修复类型
 declare module 'react-router-dom' {
   import type { ComponentPropsWithoutRef } from 'react'
+  import type { Location, NavigateFunction } from 'react-router'
 
   export interface NavLinkProps
     extends Omit<ComponentPropsWithoutRef<'a'>, 'href' | 'className'> {
@@ -40,5 +41,7 @@ declare module 'react-router-dom' {
   }
 
   export const Route: React.ComponentType<RouteProps>
-}
 
+  export const useLocation: () => Location
+  export const useNavigate: () => NavigateFunction
+}

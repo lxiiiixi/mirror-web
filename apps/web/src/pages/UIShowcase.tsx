@@ -42,6 +42,7 @@ function UIShowcase() {
     ticketItemCard: true,
     projectTabs: true,
     coefficientTable: true,
+    fonts: true,
   })
 
   // ProductCard 示例数据
@@ -159,6 +160,33 @@ function UIShowcase() {
     { level: 'L1', power: '0 - 100', coefficient: '1.0x' },
     { level: 'L2', power: '101 - 300', coefficient: '1.2x' },
     { level: 'L3', power: '301 - 600', coefficient: '1.5x' },
+  ]
+
+  const fontSamples = [
+    {
+      name: 'Primary',
+      var: '--font-primary',
+      english: 'Mirror fonts sample: The quick brown fox jumps over the lazy dog.',
+      chinese: '繁體字體示例：迅速的棕色狐狸跳過了懶狗。',
+    },
+    {
+      name: 'Display',
+      var: '--font-display',
+      english: 'Display sample: MIRROR UI SHOWCASE',
+      chinese: '展示字體示例：鏡像介面展示',
+    },
+    {
+      name: 'Accent',
+      var: '--font-accent',
+      english: 'Accent sample: Curated stories, crafted moments.',
+      chinese: '強調字體示例：精選故事，細膩時刻。',
+    },
+    {
+      name: 'Emphasis',
+      var: '--font-emphasis',
+      english: 'Emphasis sample: POWER · GROWTH · VALUE',
+      chinese: '強調字體示例：力量 · 成長 · 價值',
+    },
   ]
 
   // 切换 section 的展开/折叠状态
@@ -587,6 +615,55 @@ function UIShowcase() {
               theadHeaderKeys={coefficientKeys}
               data={coefficientRows}
             />
+        </div>
+      </section>
+
+      {/* Fonts 组件展示 */}
+      <section className="space-y-6">
+        <div
+          className="cursor-pointer select-none"
+          onClick={() => toggleSection('fonts')}
+        >
+          <div className="flex items-center justify-between">
+            <h3 className="text-xl font-semibold text-white">Fonts 字体展示</h3>
+            <span
+              className={`text-white transition-transform duration-300 ${
+                expandedSections.fonts ? 'rotate-180' : ''
+              }`}
+            >
+              ▼
+            </span>
+          </div>
+          <p className="mt-1 text-sm text-[--color-text-muted]">
+            当前主题字体变量与中英示例
+          </p>
+        </div>
+
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            expandedSections.fonts ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="grid gap-6 rounded-3xl border border-white/10 bg-white/5 p-8 md:grid-cols-2">
+            {fontSamples.map((sample) => (
+              <div
+                key={sample.name}
+                className="rounded-2xl border border-white/10 bg-white/5 p-5"
+                style={{ fontFamily: `var(${sample.var})` }}
+              >
+                <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-slate-200">
+                  <span>{sample.name}</span>
+                  <span className="text-[--color-text-muted]">{sample.var}</span>
+                </div>
+                <div className="mt-3 text-sm text-white">
+                  {sample.english}
+                </div>
+                <div className="mt-2 text-sm text-white">
+                  {sample.chinese}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -1,16 +1,18 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { NavLink, Route, Routes } from 'react-router-dom'
+import { NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import useMediaQuery from './hooks/useMediaQuery'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import UIShowcase from './pages/UIShowcase'
-import { Button } from './ui'
+import { AppLayout } from './ui'
 import { images } from '@mirror/assets'
 
 function App() {
   const { t, i18n } = useTranslation()
   const isDesktop = useMediaQuery('(min-width: 1024px)')
+  const navigate = useNavigate()
+  const location = useLocation()
 
   // 桌面端自动重定向到白皮书网站
   useEffect(() => {
@@ -32,6 +34,29 @@ function App() {
     ].join(' ')
 
   const currentLanguage = i18n.resolvedLanguage ?? 'en'
+  const activeFooterIndex = location.pathname.startsWith('/ui') ? 1 : 0
+  const footerItems = [
+    {
+      label: t('footer.entertainFI'),
+      icon: images.nav.footHome,
+      activeIcon: images.nav.footHomeOn,
+      position: 'left' as const,
+      onClick: () => navigate('/'),
+    },
+    {
+      label: t('footer.home'),
+      icon: images.nav.footProfile,
+      activeIcon: images.nav.footProfileOn,
+      position: 'center' as const,
+      onClick: () => navigate('/ui'),
+    },
+    {
+      label: t('footer.kol'),
+      icon: images.nav.footDiscover,
+      activeIcon: images.nav.footDiscoverOn,
+      position: 'right' as const,
+    },
+  ]
 
   // 如果是桌面端，先不渲染任何内容（等待重定向）
   if (isDesktop) {
@@ -39,32 +64,22 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen w-full">
+    <AppLayout
+      showWalletBar={true}
+      showPageNav={false}
+      languageLabel={t('header.language')}
+      assetsLabel={t('header.assets')}
+      loginLabel={t('header.connect')}
+      isLoggedIn={false}
+      onLanguageClick={() =>
+        i18n.changeLanguage(currentLanguage === 'en' ? 'zh-hk' : 'en')
+      }
+      onLogoClick={() => navigate('/')}
+      onWalletClick={() => navigate('/')}
+      footerItems={footerItems}
+      activeFooterIndex={activeFooterIndex}
+    >
       <div className="mx-auto flex max-w-5xl flex-col gap-10 px-6 py-12">
-        <header className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col gap-4 sm:items-end">
-            <nav className="flex flex-wrap gap-3">
-              <NavLink className={navLinkClass} to="/">
-                {t('app.nav.overview')}
-              </NavLink>
-              <NavLink className={navLinkClass} to="/ui">
-                UI
-              </NavLink>
-            </nav>
-          </div>
-          {["en", "zh-hk"].map((language) => language !== currentLanguage && (
-              <Button
-                key={language}
-                fullWidth={false}
-                rounded
-                onClick={() => i18n.changeLanguage(language)}
-              >
-                {language}  
-              </Button>
-            ))}
-        </header>
-        <div> <img src={images.logo} alt="Logo" className="h-10 w-auto" /></div>
-
         <main className="flex-1">
           <Routes>
             <Route element={<Home />} path="/" />
@@ -73,7 +88,7 @@ function App() {
           </Routes>
         </main>
       </div>
-    </div>
+    </AppLayout>
   )
 }
 
