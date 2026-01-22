@@ -1,5 +1,15 @@
 import { useState } from 'react'
-import { Button, Card, Input, Modal, Spinner, Tabs } from '../ui'
+import {
+  Button,
+  Card,
+  Input,
+  Modal,
+  Spinner,
+  Tabs,
+  ProductCard,
+  ProductCardCarousel,
+  ProductData,
+} from '../ui'
 
 /**
  * UI 组件展示页面
@@ -20,7 +30,56 @@ function UIShowcase() {
     spinner: true,
     modal: true,
     features: true,
+    productCard: true,
   })
+
+  // ProductCard 示例数据
+  const sampleProducts: ProductData[] = [
+    {
+      id: 1,
+      name: 'I Became the Youngest Member',
+      coverUrl: 'https://picsum.photos/seed/comic1/400/600',
+      type: 'comic',
+      shareCount: 539,
+      isShared: false,
+      creators: ['Gangseoul', 'Masgom', 'Masgom'],
+    },
+    {
+      id: 2,
+      name: 'TOGETHER',
+      coverUrl: 'https://picsum.photos/seed/music1/400/600',
+      type: 'music',
+      shareCount: 462,
+      isShared: true,
+      creators: ['Jeff(WHYNOTME)', 'NULL'],
+    },
+    {
+      id: 3,
+      name: 'The Last Journey',
+      coverUrl: 'https://picsum.photos/seed/movie1/400/600',
+      type: 'movie',
+      shareCount: 128,
+      isShared: false,
+      creators: ['John Director', 'Jane Producer'],
+    },
+  ]
+
+  // 带简介的产品数据用于轮播
+  const carouselProducts = sampleProducts.map((product, index) => ({
+    ...product,
+    description:
+      index === 0
+        ? '"25...that\'s too old to become an idol." Do Seohan, who got eliminated from the successful idol survival audition "I Am The Strongest Idol"...'
+        : `这是一个精彩的作品，讲述了一个关于梦想与坚持的故事。作品${index + 1}`,
+  }))
+
+  const handleProductClick = (product: ProductData) => {
+    alert(`点击了作品：${product.name}`)
+  }
+
+  const handleShareToX = (product: ProductData) => {
+    alert(`分享到 X：${product.name}`)
+  }
 
   // 切换 section 的展开/折叠状态
   const toggleSection = (sectionId: string) => {
@@ -82,12 +141,6 @@ function UIShowcase() {
                 onClick={() => setClickCount((c) => c + 1)}
               >
                 次要按钮
-              </Button>
-              <Button
-                variant="gradient"
-                onClick={() => setClickCount((c) => c + 1)}
-              >
-                渐变按钮
               </Button>
               <Button variant="primary" disabled>
                 禁用按钮
@@ -371,6 +424,71 @@ function UIShowcase() {
             该弹窗复刻旧版的玻璃拟态质感，并支持自定义内容与操作。
           </p>
         </Modal>
+      </section>
+
+      {/* ProductCard 组件展示 */}
+      <section className="space-y-6">
+        <div
+          className="cursor-pointer select-none"
+          onClick={() => toggleSection('productCard')}
+        >
+          <div className="flex items-center justify-between">
+            <h3 className="text-xl font-semibold text-white">ProductCard 产品卡片组件</h3>
+            <span
+              className={`text-white transition-transform duration-300 ${
+                expandedSections.productCard ? 'rotate-180' : ''
+              }`}
+            >
+              ▼
+            </span>
+          </div>
+          <p className="mt-1 text-sm text-[--color-text-muted]">
+            用于展示作品信息的卡片组件，支持基础卡片和轮播卡片两种形式
+          </p>
+        </div>
+
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            expandedSections.productCard ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          {/* 基础产品卡片 */}
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-200">
+              基础产品卡片 (ProductCard)
+            </h4>
+            <div className="flex flex-wrap items-start gap-6 rounded-3xl border border-white/10 bg-white/5 p-8">
+              {sampleProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onClick={handleProductClick}
+                  onShareToX={handleShareToX}
+                />
+              ))}
+            </div>
+            <div className="text-xs text-[--color-text-muted] mt-2">
+              <p>• 小尺寸卡片 (110px × 160px)</p>
+              <p>• 显示作品封面、标题、作者</p>
+              <p>• 支持分享到 X 功能</p>
+              <p>• 显示作品类型标签</p>
+            </div>
+          </div>
+
+          {/* 轮播产品卡片 */}
+          <div className="mt-8 space-y-4">
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-200">
+              轮播产品卡片 (ProductCardCarousel)
+            </h4>
+              <ProductCardCarousel
+                products={carouselProducts}
+                onClickProduct={handleProductClick}
+                onShareToX={handleShareToX}
+                autoplay={true}
+                autoplayInterval={5000}
+              />
+          </div>
+        </div>
       </section>
     </div>
   )

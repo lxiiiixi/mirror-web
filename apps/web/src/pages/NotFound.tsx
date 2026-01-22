@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 function NotFound() {
   const { t } = useTranslation()
@@ -15,12 +15,12 @@ function NotFound() {
       <p className="mt-3 text-sm text-slate-600">
         {t('notFound.description')}
       </p>
-      <Link
+      <NavLink
         className="mt-6 inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-slate-900/20 transition hover:-translate-y-0.5 hover:bg-slate-800"
         to="/"
       >
         {t('notFound.back')}
-      </Link>
+      </NavLink>
     </div>
   )
 }

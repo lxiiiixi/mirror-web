@@ -160,6 +160,18 @@ import worksTwLogo from './images/works/tw-logo.png'
 import worksUploadWorkBtn from './images/works/upload-work-btn.png'
 import worksYoutubeLogo from './images/works/youtube-logo.png'
 
+// 作品类型图标
+import worksProductAnimate from './images/works/product/animate.svg'
+import worksProductComic from './images/works/product/comic.svg'
+import worksProductDrama from './images/works/product/drama.svg'
+import worksProductMovie from './images/works/product/movie.svg'
+import worksProductMusic from './images/works/product/music.svg'
+import worksProductNovel from './images/works/product/novel.svg'
+import worksProductPlaylet from './images/works/product/playlet.svg'
+import worksProductRegular from './images/works/product/regular.svg'
+import worksProductTv from './images/works/product/tv.svg'
+import worksProductVlog from './images/works/product/vlog.svg'
+
 // IDO 相关
 import idoLook from './images/ido/look.png'
 import idoMore from './images/ido/more.png'
@@ -303,6 +315,19 @@ export const images = {
     twLogo: worksTwLogo,
     uploadWorkBtn: worksUploadWorkBtn,
     youtubeLogo: worksYoutubeLogo,
+    // 作品类型图标
+    product: {
+      animate: worksProductAnimate,
+      comic: worksProductComic,
+      drama: worksProductDrama,
+      movie: worksProductMovie,
+      music: worksProductMusic,
+      novel: worksProductNovel,
+      playlet: worksProductPlaylet,
+      regular: worksProductRegular,
+      tv: worksProductTv,
+      vlog: worksProductVlog,
+    },
   },
 
   // IDO 相关
