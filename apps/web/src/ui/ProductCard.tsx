@@ -158,7 +158,7 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
 
         {/* 底部内容区域 */}
         <div className="absolute z-9 w-[94px] h-[40px] rounded-[5px] border border-[rgba(127,127,127,0.4)] bg-[linear-gradient(180deg,rgba(127,127,127,0.33)_100%,rgba(217,217,217,0.63)_20%)] backdrop-blur-[10px] bottom-[7px] left-0 right-0 mx-auto p-[5px] text-white [text-shadow:0_0.6px_1.3px_rgba(0,0,0,0.98)] text-[8px] font-normal text-center">
-          <div className="[font-family:var(--font-primary)] mb-[5px] break-all overflow-hidden text-ellipsis line-clamp-1">
+          <div className="mb-[5px] break-all overflow-hidden text-ellipsis line-clamp-1">
             《{product.name}》
           </div>
           <div className="break-all overflow-hidden text-ellipsis line-clamp-1">

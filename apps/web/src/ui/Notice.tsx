@@ -61,7 +61,6 @@ export const Notice = forwardRef<HTMLDivElement, NoticeProps>(
 
         <style jsx>{`
           .notice-container {
-            font-family: var(--font-primary);
             color: #fff;
             font-size: 13px;
             background: var(--color-secondary-bg);

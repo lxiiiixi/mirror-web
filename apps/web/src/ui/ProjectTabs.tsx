@@ -76,7 +76,6 @@ export const ProjectTabs = forwardRef<HTMLDivElement, ProjectTabsProps>(
 
         <style jsx>{`
           .project-tabs {
-            font-family: var(--font-primary);
             display: flex;
             align-items: center;
             gap: 9px;

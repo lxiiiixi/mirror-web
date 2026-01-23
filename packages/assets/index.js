@@ -1,29 +1,29 @@
 // 字体资源
-import RubikFont from './fonts/Rubik-VariableFont_wght.ttf'
-import RubikItalicFont from './fonts/Rubik-Italic-VariableFont_wght.ttf'
-import RubikRegularFont from './fonts/Rubik.ttf'
-import SquadaOneFont from './fonts/SquadaOne.ttf'
-import FredokaFont from './fonts/Fredoka.ttf'
-import PassionFont from './fonts/Passion.ttf'
-import RubikGlitchFont from './fonts/RubikGlitch.ttf'
-import RubikMonoOneFont from './fonts/RubikMonoOne.ttf'
-import IconFont from './fonts/iconfont.ttf'
+// import RubikFont from './fonts/Rubik-VariableFont_wght.ttf'
+// import RubikItalicFont from './fonts/Rubik-Italic-VariableFont_wght.ttf'
+// import RubikRegularFont from './fonts/Rubik.ttf'
+// import SquadaOneFont from './fonts/SquadaOne.ttf'
+// import FredokaFont from './fonts/Fredoka.ttf'
+// import PassionFont from './fonts/Passion.ttf'
+// import RubikGlitchFont from './fonts/RubikGlitch.ttf'
+// import RubikMonoOneFont from './fonts/RubikMonoOne.ttf'
+// import IconFont from './fonts/iconfont.ttf'
 
-export const fonts = {
-  Rubik: RubikFont,
-  RubikItalic: RubikItalicFont,
-  RubikRegular: RubikRegularFont,
-  font_Rubik: RubikRegularFont,
-  'Rubik-italic': RubikItalicFont,
-  SquadaOne: SquadaOneFont,
-  Fredoka: FredokaFont,
-  font_Fredoka: FredokaFont,
-  Passion: PassionFont,
-  font_Passion: PassionFont,
-  RubikGlitch: RubikGlitchFont,
-  RubikMonoOne: RubikMonoOneFont,
-  iconfont: IconFont,
-}
+// export const fonts = {
+//   Rubik: RubikFont,
+//   RubikItalic: RubikItalicFont,
+//   RubikRegular: RubikRegularFont,
+//   font_Rubik: RubikRegularFont,
+//   'Rubik-italic': RubikItalicFont,
+//   SquadaOne: SquadaOneFont,
+//   Fredoka: FredokaFont,
+//   font_Fredoka: FredokaFont,
+//   Passion: PassionFont,
+//   font_Passion: PassionFont,
+//   RubikGlitch: RubikGlitchFont,
+//   RubikMonoOne: RubikMonoOneFont,
+//   iconfont: IconFont,
+// }
 
 // 图标资源
 import faviconIcon from './favicon.ico'

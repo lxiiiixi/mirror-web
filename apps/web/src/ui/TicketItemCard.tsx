@@ -275,7 +275,6 @@ export const TicketItemCard = forwardRef<HTMLDivElement, TicketItemCardProps>(
 
         <style jsx>{`
           .ticket-item-card {
-            font-family: var(--font-primary);
             font-size: 11px;
             color: #ffffff;
             display: flex;
@@ -303,7 +302,6 @@ export const TicketItemCard = forwardRef<HTMLDivElement, TicketItemCardProps>(
             top: -25px;
             position: absolute;
             right: 0;
-            font-family: "Roboto", var(--font-primary);
             font-weight: 600;
             font-size: 14px;
             font-feature-settings: "kern" on;

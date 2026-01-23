@@ -324,7 +324,6 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(
 
         <style jsx>{`
           .banner-container {
-            font-family: var(--font-primary);
             overflow: hidden;
             padding: 10px 0;
           }

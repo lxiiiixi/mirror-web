@@ -35,10 +35,7 @@
   --color-spinner: rgba(255, 255, 255, 0.9);
   --color-spinner-track: rgba(255, 255, 255, 0.2);
 
-  --font-primary: "Rubik", "font_Rubik", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-  --font-display: "SquadaOne", "RubikMonoOne", "RubikGlitch", "Rubik", "font_Rubik", sans-serif;
-  --font-accent: "Fredoka", "font_Fredoka", "Rubik", "font_Rubik", sans-serif;
-  --font-emphasis: "Passion", "font_Passion", "Rubik", "font_Rubik", sans-serif;
+  --font-primary: "Oxanium", "font_Oxanium", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
 
   /* 基础样式 */
   font-family: var(--font-primary);

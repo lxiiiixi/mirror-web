@@ -68,7 +68,6 @@ export const CoefficientTable = forwardRef<HTMLDivElement, CoefficientTableProps
 
         <style jsx>{`
           .coefficient-table {
-            font-family: var(--font-primary);
             border-radius: 6px;
             overflow: hidden;
             background: rgba(16, 16, 45, 0.6);

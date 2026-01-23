@@ -276,7 +276,6 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
 
           .header {
             position: relative;
-            font-family: var(--font-primary);
             color: #fff;
             z-index: 99;
           }
@@ -407,7 +406,6 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
           .page-title {
             flex: 1;
             text-align: center;
-            font-family: var(--font-primary);
             font-size: 16px;
             font-weight: 700;
             color: #fff;
