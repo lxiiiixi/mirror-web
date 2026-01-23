@@ -7,7 +7,7 @@ import NotFound from './pages/NotFound'
 import UIShowcase from './pages/UIShowcase'
 import { AppLayout } from './ui'
 import { images } from '@mirror/assets'
-import { LoginModal } from './components/LoginModal'
+import { LoginModal } from './components'
 import { useLoginModalStore } from './store/useLoginModalStore'
 
 function App() {

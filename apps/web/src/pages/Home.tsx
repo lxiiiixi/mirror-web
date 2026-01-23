@@ -7,7 +7,7 @@ function Home() {
 
   return (
     <div className="">
-      {/* <Notice message={t('notice.defaultMessage')} /> */}
+      <Notice message={t('notice.defaultMessage')} />
       <div className="w-full h-[1200px] bg-red-100"></div>
     </div>
   )

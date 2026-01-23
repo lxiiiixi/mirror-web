@@ -1,4 +1,12 @@
-import { HTMLAttributes, ReactNode, forwardRef } from 'react'
+import {
+  HTMLAttributes,
+  ReactNode,
+  UIEvent,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { images } from '@mirror/assets'
 
 export interface AppLayoutFooterItem {
@@ -66,8 +74,8 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
       children,
       showWalletBar = true,
       showPageNav = false,
-      hideHeader = false,
-      scrollShadow = false,
+      hideHeader = true,
+      scrollShadow = true,
       pageTitle,
       headerRight,
       languageLabel = 'Language',
@@ -93,15 +101,83 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
     const shouldShowFooter = showFooter && footerItems.length > 0
     const contentPaddingTop = shouldShowHeader ? HEADER_HEIGHT : 0
     const contentPaddingBottom = shouldShowFooter ? FOOTER_HEIGHT : 0
+    const [isHeaderHidden, setIsHeaderHidden] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false)
+    const contentRef = useRef<HTMLElement | null>(null)
+    const lastScrollTop = useRef(0)
+    const scrollThreshold = 8
+    const isHeaderHiddenRef = useRef(false)
+    const isScrolledRef = useRef(false)
+
+    const setHeaderHidden = (value: boolean) => {
+      if (value !== isHeaderHiddenRef.current) {
+        isHeaderHiddenRef.current = value
+        setIsHeaderHidden(value)
+      }
+    }
+
+    const setScrolled = (value: boolean) => {
+      if (value !== isScrolledRef.current) {
+        isScrolledRef.current = value
+        setIsScrolled(value)
+      }
+    }
+
+    const getScrollTop = () => {
+      const target = contentRef.current
+      if (target && target.scrollHeight > target.clientHeight) {
+        return target.scrollTop
+      }
+      return window.scrollY || document.documentElement.scrollTop || 0
+    }
+
+    const updateScrollState = () => {
+      const currentScrollTop = getScrollTop()
+      const nextScrolled = currentScrollTop > 0
+      if (nextScrolled !== isScrolledRef.current) {
+        setScrolled(nextScrolled)
+      }
+
+      if (currentScrollTop <= 0) {
+        setHeaderHidden(false)
+        lastScrollTop.current = 0
+        return
+      }
+
+      const delta = currentScrollTop - lastScrollTop.current
+      if (Math.abs(delta) < scrollThreshold) {
+        return
+      }
+
+      const nextHidden = delta > 0
+      setHeaderHidden(nextHidden)
+      lastScrollTop.current = currentScrollTop
+    }
+
+    const handleContentScroll = (_event: UIEvent<HTMLElement>) => {
+      updateScrollState()
+    }
+
+    useEffect(() => {
+      const handleWindowScroll = () => {
+        updateScrollState()
+      }
+      window.addEventListener('scroll', handleWindowScroll, { passive: true })
+      return () => {
+        window.removeEventListener('scroll', handleWindowScroll)
+      }
+    }, [])
+
+    const shouldHideHeader = hideHeader || isHeaderHidden
 
     return (
       <div ref={ref} className={`app-layout ${className}`} {...props}>
         {shouldShowHeader ? (
           <div className={`header ${shouldShowHeader ? 'is-show' : ''}`}>
             <div
-              className={`wrapper transition ${scrollShadow ? 'scroll-shadow' : ''} ${
-                hideHeader ? 'hide-header' : ''
-              }`}
+              className={`wrapper transition ${
+                scrollShadow && isScrolled ? 'scroll-shadow' : ''
+              } ${shouldHideHeader ? 'hide-header' : ''}`}
             >
               {showWalletBar ? (
                 <>
@@ -143,6 +219,8 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
 
         <main
           className="content"
+          ref={contentRef}
+          onScroll={handleContentScroll}
           style={{
             paddingTop: `${contentPaddingTop}px`,
             paddingBottom: `${contentPaddingBottom}px`,
@@ -223,6 +301,8 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
 
           .hide-header {
             transform: translateY(-${HEADER_HEIGHT}px);
+            opacity: 0;
+            pointer-events: none;
           }
 
           .header-item {

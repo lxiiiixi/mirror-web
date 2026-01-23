@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
-import { Modal } from '../ui'
-import { useLoginModalStore } from '../store/useLoginModalStore'
+import { Modal } from '../../ui'
+import { useLoginModalStore } from '../../store/useLoginModalStore'
 
 export interface LoginModalProps {
   onWalletLogin?: () => void
