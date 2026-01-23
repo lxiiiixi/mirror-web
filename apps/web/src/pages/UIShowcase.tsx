@@ -573,13 +573,13 @@ function UIShowcase() {
             <ProjectTabs
               tabs={projectTabs}
               activeIndex={activeProjectTab}
-              onChange={(index) => setActiveProjectTab(index)}
+              onTabChange={(index: number) => setActiveProjectTab(index)}
               padded={true}
             />
             <ProjectTabs
               tabs={projectTabs}
               activeIndex={activeProjectTab}
-              onChange={(index) => setActiveProjectTab(index)}
+              onTabChange={(index: number) => setActiveProjectTab(index)}
             />
         </div>
       </section>
