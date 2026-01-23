@@ -1,40 +1,28 @@
+import { images } from "@mirror/assets"
 import {
-  HTMLAttributes,
-  ReactNode,
-  UIEvent,
+  type HTMLAttributes,
+  type ReactNode,
+  type UIEvent,
   forwardRef,
   useEffect,
   useRef,
   useState,
-} from 'react'
-import { images } from '@mirror/assets'
+} from "react"
 
 export interface AppLayoutFooterItem {
   label: ReactNode
   icon: string
   activeIcon?: string
-  position?: 'left' | 'center' | 'right'
+  position?: "left" | "center" | "right"
   key?: string | number
   onClick?: () => void
 }
 
 export interface AppLayoutProps extends HTMLAttributes<HTMLDivElement> {
-  /**
-   * Main content
-   */
   children: ReactNode
-
-  /**
-   * Header display
-   */
   showWalletBar?: boolean
   showPageNav?: boolean
-  hideHeader?: boolean
   scrollShadow?: boolean
-
-  /**
-   * Header content
-   */
   pageTitle?: ReactNode
   headerRight?: ReactNode
   languageLabel?: ReactNode
@@ -44,18 +32,11 @@ export interface AppLayoutProps extends HTMLAttributes<HTMLDivElement> {
   langIconSrc?: string
   logoSrc?: string
   backIconSrc?: string
-
-  /**
-   * Header actions
-   */
+  footerBgSrc?: string
   onLanguageClick?: () => void
   onLogoClick?: () => void
   onWalletClick?: () => void
   onBack?: () => void
-
-  /**
-   * Footer items
-   */
   footerItems?: AppLayoutFooterItem[]
   activeFooterIndex?: number
   showFooter?: boolean
@@ -64,27 +45,23 @@ export interface AppLayoutProps extends HTMLAttributes<HTMLDivElement> {
 const HEADER_HEIGHT = 55
 const FOOTER_HEIGHT = 86
 
-/**
- * AppLayout component
- * Provides fixed header and footer with a scrollable middle area
- */
 export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
   (
     {
       children,
       showWalletBar = true,
       showPageNav = false,
-      hideHeader = true,
       scrollShadow = true,
       pageTitle,
       headerRight,
-      languageLabel = 'Language',
-      assetsLabel = 'Assets',
-      loginLabel = 'Login',
+      languageLabel = "Language",
+      assetsLabel = "Assets",
+      loginLabel = "Login",
       isLoggedIn = false,
-      langIconSrc = images.nav.lang,
+      langIconSrc,
       logoSrc = images.logo,
-      backIconSrc = images.works.backBtn,
+      backIconSrc,
+      footerBgSrc,
       onLanguageClick,
       onLogoClick,
       onWalletClick,
@@ -92,36 +69,21 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
       footerItems = [],
       activeFooterIndex = 0,
       showFooter = true,
-      className = '',
+      className = "",
       ...props
     },
-    ref,
+    ref
   ) => {
     const shouldShowHeader = showWalletBar || showPageNav
     const shouldShowFooter = showFooter && footerItems.length > 0
     const contentPaddingTop = shouldShowHeader ? HEADER_HEIGHT : 0
     const contentPaddingBottom = shouldShowFooter ? FOOTER_HEIGHT : 0
-    const [isHeaderHidden, setIsHeaderHidden] = useState(false)
+    const [headerOffset, setHeaderOffset] = useState(0)
     const [isScrolled, setIsScrolled] = useState(false)
     const contentRef = useRef<HTMLElement | null>(null)
     const lastScrollTop = useRef(0)
-    const scrollThreshold = 8
-    const isHeaderHiddenRef = useRef(false)
-    const isScrolledRef = useRef(false)
-
-    const setHeaderHidden = (value: boolean) => {
-      if (value !== isHeaderHiddenRef.current) {
-        isHeaderHiddenRef.current = value
-        setIsHeaderHidden(value)
-      }
-    }
-
-    const setScrolled = (value: boolean) => {
-      if (value !== isScrolledRef.current) {
-        isScrolledRef.current = value
-        setIsScrolled(value)
-      }
-    }
+    const headerOffsetRef = useRef(0)
+    const rafId = useRef<number | null>(null)
 
     const getScrollTop = () => {
       const target = contentRef.current
@@ -133,70 +95,120 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
 
     const updateScrollState = () => {
       const currentScrollTop = getScrollTop()
-      const nextScrolled = currentScrollTop > 0
-      if (nextScrolled !== isScrolledRef.current) {
-        setScrolled(nextScrolled)
-      }
 
+      // Background only shows when not at top
+      const nextScrolled = currentScrollTop > 0
+      setIsScrolled(nextScrolled)
+
+      // At top: reset header
       if (currentScrollTop <= 0) {
-        setHeaderHidden(false)
+        headerOffsetRef.current = 0
+        setHeaderOffset(0)
         lastScrollTop.current = 0
         return
       }
 
       const delta = currentScrollTop - lastScrollTop.current
-      if (Math.abs(delta) < scrollThreshold) {
-        return
+
+      // Scrolling up (finger up, content down) - hide header
+      if (delta > 0) {
+        const newOffset = Math.min(
+          HEADER_HEIGHT,
+          headerOffsetRef.current + delta
+        )
+        headerOffsetRef.current = newOffset
+        setHeaderOffset(newOffset)
+      }
+      // Scrolling down (finger down, content up) - show header
+      else if (delta < 0) {
+        const newOffset = Math.max(0, headerOffsetRef.current + delta)
+        headerOffsetRef.current = newOffset
+        setHeaderOffset(newOffset)
       }
 
-      const nextHidden = delta > 0
-      setHeaderHidden(nextHidden)
       lastScrollTop.current = currentScrollTop
     }
 
+    const handleScroll = () => {
+      if (rafId.current) {
+        cancelAnimationFrame(rafId.current)
+      }
+      rafId.current = requestAnimationFrame(() => {
+        updateScrollState()
+      })
+    }
+
     const handleContentScroll = (_event: UIEvent<HTMLElement>) => {
-      updateScrollState()
+      handleScroll()
     }
 
     useEffect(() => {
-      const handleWindowScroll = () => {
-        updateScrollState()
-      }
-      window.addEventListener('scroll', handleWindowScroll, { passive: true })
+      window.addEventListener("scroll", handleScroll, { passive: true })
       return () => {
-        window.removeEventListener('scroll', handleWindowScroll)
+        window.removeEventListener("scroll", handleScroll)
+        if (rafId.current) {
+          cancelAnimationFrame(rafId.current)
+        }
       }
     }, [])
-
-    const shouldHideHeader = hideHeader || isHeaderHidden
 
     return (
       <div ref={ref} className={`app-layout ${className}`} {...props}>
         {shouldShowHeader ? (
-          <div className={`header ${shouldShowHeader ? 'is-show' : ''}`}>
+          <div className={`header ${shouldShowHeader ? "is-show" : ""}`}>
             <div
-              className={`wrapper transition ${
-                scrollShadow && isScrolled ? 'scroll-shadow' : ''
-              } ${shouldHideHeader ? 'hide-header' : ''}`}
+              className={`wrapper ${
+                scrollShadow && isScrolled ? "scroll-shadow" : ""
+              } ${headerOffset >= HEADER_HEIGHT ? "is-hidden" : ""}`}
+              style={{
+                transform: `translateY(-${headerOffset}px)`,
+              }}
             >
               {showWalletBar ? (
                 <>
-                  <button className="header-item" type="button" onClick={onLanguageClick}>
+                  <button
+                    className="header-item"
+                    type="button"
+                    onClick={onLanguageClick}
+                  >
                     {langIconSrc ? (
-                      <img className="lang-icon" src={langIconSrc} alt="" aria-hidden="true" />
-                    ) : null}
+                      <img
+                        className="lang-icon"
+                        src={langIconSrc || "/placeholder.svg"}
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <svg className="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                      </svg>
+                    )}
                     <span className="lang">{languageLabel}</span>
                   </button>
 
                   <div className="nav-item-logo">
-                    <button className="logo" type="button" onClick={onLogoClick} aria-label="Home">
-                      {logoSrc ? <img src={logoSrc} alt="" aria-hidden="true" /> : null}
+                    <button
+                      className="logo"
+                      type="button"
+                      onClick={onLogoClick}
+                      aria-label="Home"
+                    >
+                      {logoSrc ? <img src={logoSrc} alt="logo" aria-hidden="true" /> : null}
                     </button>
                   </div>
 
-                  <button className="header-item connector" type="button" onClick={onWalletClick}>
-                    <span className={`connect-btn ${isLoggedIn ? 'assets' : ''}`}>
-                      <span className="text">{isLoggedIn ? assetsLabel : loginLabel}</span>
+                  <button
+                    className="header-item connector"
+                    type="button"
+                    onClick={onWalletClick}
+                  >
+                    <span
+                      className={`connect-btn ${isLoggedIn ? "assets" : ""}`}
+                    >
+                      <span className="text">
+                        {isLoggedIn ? assetsLabel : loginLabel}
+                      </span>
                     </span>
                   </button>
                 </>
@@ -204,9 +216,14 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
 
               {showPageNav ? (
                 <>
-                  <button className="page-back" type="button" onClick={onBack} aria-label="Back">
+                  <button
+                    className="page-back"
+                    type="button"
+                    onClick={onBack}
+                    aria-label="Back"
+                  >
                     {backIconSrc ? (
-                      <img src={backIconSrc} alt="" aria-hidden="true" />
+                      <img src={backIconSrc || "/placeholder.svg"} alt="" aria-hidden="true" />
                     ) : null}
                   </button>
                   <div className="page-title">{pageTitle}</div>
@@ -224,8 +241,8 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
           style={{
             paddingTop: `${contentPaddingTop}px`,
             paddingBottom: `${contentPaddingBottom}px`,
-            paddingLeft: '15px',
-            paddingRight: '15px',
+            paddingLeft: "15px",
+            paddingRight: "15px",
           }}
         >
           {children}
@@ -234,21 +251,30 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
         {shouldShowFooter ? (
           <footer
             className="footer-nav"
-            style={{ backgroundImage: `url(${images.nav.footBarBg})` }}
+            style={
+              footerBgSrc ? { backgroundImage: `url(${footerBgSrc})` } : {}
+            }
           >
             {footerItems.map((item, index) => {
               const isActive = index === activeFooterIndex
-              const positionClass = item.position ? `${item.position}-nav` : ''
-              const iconSrc = isActive ? item.activeIcon || item.icon : item.icon
+              const positionClass = item.position ? `${item.position}-nav` : ""
+              const iconSrc = isActive
+                ? item.activeIcon || item.icon
+                : item.icon
               return (
                 <button
                   key={item.key ?? index}
                   type="button"
-                  className={`nav-item ${positionClass} ${isActive ? 'active' : ''}`}
+                  className={`nav-item ${positionClass} ${isActive ? "active" : ""}`}
                   onClick={item.onClick}
                 >
                   <span className="pr-icon">
-                    <img className="nav-icon" src={iconSrc} alt="" aria-hidden="true" />
+                    <img
+                      className="nav-icon"
+                      src={iconSrc || "/placeholder.svg"}
+                      alt=""
+                      aria-hidden="true"
+                    />
                   </span>
                   <span className="pr-text">
                     <span className="nav-text">{item.label}</span>
@@ -291,16 +317,18 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition: all 0.4s;
+            transition:
+              transform 0.15s ease-out,
+              background-color 0.2s ease;
+            will-change: transform, background-color;
+            background: transparent;
           }
 
           .wrapper.scroll-shadow {
             background: rgb(18 9 44 / 90%);
           }
 
-          .hide-header {
-            transform: translateY(-${HEADER_HEIGHT}px);
-            opacity: 0;
+          .wrapper.is-hidden {
             pointer-events: none;
           }
 
@@ -359,6 +387,13 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
             height: 100%;
             object-fit: contain;
             display: block;
+          }
+
+          .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
           }
 
           .lang-icon {
@@ -508,7 +543,7 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
         `}</style>
       </div>
     )
-  },
+  }
 )
 
-AppLayout.displayName = 'AppLayout'
+AppLayout.displayName = "AppLayout"
