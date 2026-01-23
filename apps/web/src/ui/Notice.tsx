@@ -71,9 +71,7 @@ export const Notice = forwardRef<HTMLDivElement, NoticeProps>(
             align-items: center;
             overflow: hidden;
             box-sizing: border-box;
-            /* margin: 0 5px; */
-            max-width: 100vw;
-            /* max-width: calc(100vw - 30px); */
+            width: 100%;
             height: 36px;
           }
 

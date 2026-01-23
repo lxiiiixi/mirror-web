@@ -53,7 +53,7 @@ export interface AppLayoutProps extends HTMLAttributes<HTMLDivElement> {
   showFooter?: boolean
 }
 
-const HEADER_HEIGHT = 45
+const HEADER_HEIGHT = 55
 const FOOTER_HEIGHT = 86
 
 /**
@@ -146,6 +146,8 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
           style={{
             paddingTop: `${contentPaddingTop}px`,
             paddingBottom: `${contentPaddingBottom}px`,
+            paddingLeft: '15px',
+            paddingRight: '15px',
           }}
         >
           {children}
@@ -188,6 +190,7 @@ export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
           }
 
           .content {
+            width: 100vw;
             flex: 1;
             min-height: 0;
             overflow-y: auto;

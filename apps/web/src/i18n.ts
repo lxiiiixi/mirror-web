@@ -3,11 +3,11 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
 import en from '@mirror/locales/en.json'
-import zhHK from '@mirror/locales/zh-hk.json'
+import zhHK from '@mirror/locales/zh-HK.json'
 
 const resources = {
   en: { common: en },
-  'zh-hk': { common: zhHK },
+  'zh-HK': { common: zhHK },
 }
 
 void i18n
@@ -16,7 +16,7 @@ void i18n
   .init({
     resources,
     fallbackLng: 'en',
-    supportedLngs: ['en', 'zh-hk'],
+    supportedLngs: ['en', 'zh-HK'],
     defaultNS: 'common',
     ns: ['common'],
     interpolation: {
@@ -24,6 +24,7 @@ void i18n
     },
     detection: {
       order: ['localStorage', 'navigator', 'htmlTag'],
+      lookupLocalStorage: 'user-lang',
       caches: ['localStorage'],
     },
   })

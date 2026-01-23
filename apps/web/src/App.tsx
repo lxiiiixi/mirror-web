@@ -25,10 +25,16 @@ function App() {
   }, [isDesktop])
 
   useEffect(() => {
-    document.documentElement.lang = i18n.resolvedLanguage ?? 'en'
-  }, [i18n.resolvedLanguage])
+    document.documentElement.lang = i18n.resolvedLanguage ?? i18n.language ?? 'en'
+  }, [i18n.resolvedLanguage, i18n.language])
 
-  const currentLanguage = i18n.resolvedLanguage ?? 'en'
+  const handleLanguageToggle = () => {
+    const currentLanguage = i18n.resolvedLanguage ?? i18n.language ?? 'en'
+    const nextLanguage = currentLanguage.toLowerCase() === 'en' ? 'zh-HK' : 'en'
+    console.log(`[Change_Language] currentLanguage: ${currentLanguage}, nextLanguage: ${nextLanguage}`)
+    localStorage.setItem('user-lang', nextLanguage)
+    void i18n.changeLanguage(nextLanguage)
+  }
   const activeFooterIndex = location.pathname.startsWith('/ui') ? 1 : 0
   const footerItems = [
     {
@@ -66,23 +72,17 @@ function App() {
       assetsLabel={t('header.assets')}
       loginLabel={t('header.login')}
       isLoggedIn={false}
-      onLanguageClick={() =>
-        i18n.changeLanguage(currentLanguage === 'en' ? 'zh-hk' : 'en')
-      }
+      onLanguageClick={handleLanguageToggle}
       onLogoClick={() => navigate('/')}
       onWalletClick={openLoginModal}
       footerItems={footerItems}
       activeFooterIndex={activeFooterIndex}
     >
-      <div className="mx-auto flex max-w-5xl flex-col gap-10 px-6 py-12">
-        <main className="flex-1">
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<UIShowcase />} path="/ui" />
             <Route element={<NotFound />} path="*" />
           </Routes>
-        </main>
-      </div>
       <LoginModal />
     </AppLayout>
   )
