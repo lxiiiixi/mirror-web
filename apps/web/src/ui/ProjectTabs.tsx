@@ -21,7 +21,7 @@ export interface ProjectTabsProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Change handler
    */
-  onChange?: (index: number, tab: ProjectTabItem) => void
+  onTabChange?: (index: number, tab: ProjectTabItem) => void
 
   /**
    * Add horizontal padding (mirrors home layout)
@@ -35,7 +35,7 @@ export interface ProjectTabsProps extends HTMLAttributes<HTMLDivElement> {
  */
 export const ProjectTabs = forwardRef<HTMLDivElement, ProjectTabsProps>(
   (
-    { tabs, activeIndex = 0, onChange, padded = false, className = '', ...props },
+    { tabs, activeIndex = 0, onTabChange, padded = false, className = '', ...props },
     ref,
   ) => {
     const rootClassName = [
@@ -62,7 +62,7 @@ export const ProjectTabs = forwardRef<HTMLDivElement, ProjectTabsProps>(
               className={`tab-item ${isActive ? 'active' : ''} ${isDisabled ? 'disabled' : ''}`}
               onClick={() => {
                 if (isDisabled) return
-                onChange?.(index, tab)
+                onTabChange?.(index, tab)
               }}
               disabled={isDisabled}
             >

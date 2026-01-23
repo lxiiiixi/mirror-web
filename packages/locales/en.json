@@ -1,4 +1,26 @@
 {
+  "banners": [
+    {
+      "img": "banner1",
+      "link": ""
+    },
+    {
+      "img": "banner2",
+      "link": ""
+    },
+    {
+      "img": "banner3",
+      "link": ""
+    },
+    {
+      "img": "banner4",
+      "link": ""
+    },
+    {
+      "img": "banner5",
+      "link": ""
+    }
+  ],
   "header": {
     "assets": "Assets",
     "login": "Login",
@@ -11,28 +33,6 @@
     "wallet": "Wallet Login",
     "email": "Email Login"
   },
-  "banners": [
-    {
-      "img": "/static/images/home/banner2/banner1.png",
-      "link": ""
-    },
-    {
-      "img": "/static/images/home/banner2/banner2.png",
-      "link": ""
-    },
-    {
-      "img": "/static/images/home/banner2/banner3.png",
-      "link": ""
-    },
-    {
-      "img": "/static/images/home/banner2/banner4.png",
-      "link": ""
-    },
-    {
-      "img": "/static/images/home/banner2/banner5.png",
-      "link": ""
-    }
-  ],
   "works": {
     "filterTagDialog": {
       "title": "All Channels",

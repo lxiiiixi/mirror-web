@@ -1,4 +1,26 @@
 {
+  "banners": [
+    {
+      "img": "banner1_cn",
+      "link": ""
+    },
+    {
+      "img": "banner2_cn",
+      "link": ""
+    },
+    {
+      "img": "banner3_cn",
+      "link": ""
+    },
+    {
+      "img": "banner4_cn",
+      "link": ""
+    },
+    {
+      "img": "banner5_cn",
+      "link": ""
+    }
+  ],
   "header": {
     "assets": "資產",
     "login": "登錄",
@@ -11,28 +33,6 @@
     "wallet": "錢包登錄",
     "email": "郵箱登錄"
   },
-  "banners": [
-    {
-      "img": "/static/images/home/banner2/banner1_cn.png",
-      "link": ""
-    },
-    {
-      "img": "/static/images/home/banner2/banner2_cn.png",
-      "link": ""
-    },
-    {
-      "img": "/static/images/home/banner2/banner3_cn.png",
-      "link": ""
-    },
-    {
-      "img": "/static/images/home/banner2/banner4_cn.png",
-      "link": ""
-    },
-    {
-      "img": "/static/images/home/banner2/banner5_cn.png",
-      "link": ""
-    }
-  ],
   "works": {
     "filterTagDialog": {
       "title": "所有頻道",
