@@ -5,6 +5,7 @@ import useMediaQuery from './hooks/useMediaQuery'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import UIShowcase from './pages/UIShowcase'
+import WorkDetail from './pages/WorkDetail'
 import { AppLayout } from './ui'
 import { images } from '@mirror/assets'
 import { LoginModal } from './components'
@@ -97,6 +98,7 @@ function App() {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<UIShowcase />} path="/ui" />
+            <Route element={<WorkDetail />} path="/works/detail" />
             <Route element={<NotFound />} path="*" />
           </Routes>
       <LoginModal />

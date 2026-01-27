@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { images } from '@mirror/assets'
+import { useNavigate } from 'react-router-dom'
 import { useInfiniteWorkList } from '../hooks/useInfiniteWorkList'
 import { resolveImageUrl } from '@mirror/utils'
 import {
@@ -54,6 +55,7 @@ const isTokenWork = (work: unknown) => {
 function Home() {
   const { t } = useTranslation()
   const [activeProject, setActiveProject] = useState(0)
+  const navigate = useNavigate()
 
   const {
     items,
@@ -106,6 +108,12 @@ function Home() {
         (work as { work_name?: string }).work_name ||
         (work as { name?: string }).name ||
         ''
+      const rawWorkType =
+        (work as { work_type?: number | string }).work_type ??
+        (work as { type?: number | string }).type ??
+        4
+      const workTypeValue =
+        typeof rawWorkType === 'string' ? Number(rawWorkType) : rawWorkType
       const coverUrl =
         resolveImageUrl(
           (work as { cover?: string }).cover ||
@@ -128,11 +136,17 @@ function Home() {
         progressPercent,
         progressText: `${t('tokenItemCard.progress')} ${progressPercent.toFixed(0)}%`,
         balanceText: `${t('tokenItemCard.balance')} ${balanceLeft}`,
+        rawType: workTypeValue,
       }
     })
   }, [t, tokenItems])
 
-  const products = useMemo<ProductData[]>(() => {
+  const handleNavigateToDetail = (id: number | string, rawType?: number) => {
+    const query = rawType ? `?id=${id}&type=${rawType}` : `?id=${id}`
+    navigate(`/works/detail${query}`)
+  }
+
+  const products = useMemo<Array<ProductData & { rawType?: number }>>(() => {
     return items.map((work) => {
       const rawWorkType =
         (work as { work_type?: number | string }).work_type ??
@@ -163,12 +177,18 @@ function Home() {
         false
       const names = (work as { names?: string[] }).names
       const author = (work as { author?: string }).author ?? ''
+      const creatorName =
+        (work as { creator_name?: string }).creator_name ||
+        (work as { work_creator_name?: string }).work_creator_name ||
+        ''
       const creators =
         Array.isArray(names) && names.length > 0
           ? names.filter(Boolean).slice(0, 3)
-          : author
-            ? splitCreators(author).slice(0, 3)
-            : []
+          : creatorName
+            ? splitCreators(creatorName).slice(0, 3)
+            : author
+              ? splitCreators(author).slice(0, 3)
+              : []
 
       return {
         id: work.id,
@@ -179,6 +199,7 @@ function Home() {
         isShared,
         creators,
         description,
+        rawType: workTypeValue,
       }
     })
   }, [items])
@@ -230,10 +251,24 @@ function Home() {
                         products={carouselProducts}
                         autoplay={true}
                         autoplayInterval={5000}
+                        onClickProduct={(product) =>
+                          handleNavigateToDetail(
+                            product.id,
+                            (product as { rawType?: number }).rawType,
+                          )
+                        }
                       />
                     </div>
                   ) : null}
-                  <ProductCard product={product} />
+                  <ProductCard
+                    product={product}
+                    onClick={() =>
+                      handleNavigateToDetail(
+                        product.id,
+                        (product as { rawType?: number }).rawType,
+                      )
+                    }
+                  />
                 </div>
               )
             })}
@@ -255,6 +290,8 @@ function Home() {
                 }}
                 labels={{ person: t('tokenItemCard.person') }}
                 actionText={t('tokenItemCard.checkIn')}
+                onCardClick={() => handleNavigateToDetail(token.id, token.rawType)}
+                onAction={() => handleNavigateToDetail(token.id, token.rawType)}
               />
             ))}
           </div>

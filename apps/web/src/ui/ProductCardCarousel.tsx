@@ -70,6 +70,8 @@ export const ProductCardCarousel = forwardRef<HTMLDivElement, ProductCardCarouse
     const [expandedDesc, setExpandedDesc] = useState(false)
     const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null)
 
+    console.log('[ProductCardCarousel] expandedDesc', expandedDesc)
+
     // 限制最多6个产品
     const displayProducts = products.slice(0, 6)
     const currentProduct = displayProducts[currentIndex] || displayProducts[0]
@@ -100,6 +102,7 @@ export const ProductCardCarousel = forwardRef<HTMLDivElement, ProductCardCarouse
 
     const handleDotClick = (index: number) => {
       setCurrentIndex(index)
+      setExpandedDesc(false)
       // 重置自动播放计时器
       if (autoplayTimerRef.current) {
         clearInterval(autoplayTimerRef.current)
@@ -112,8 +115,9 @@ export const ProductCardCarousel = forwardRef<HTMLDivElement, ProductCardCarouse
     }
 
     const handleDescToggle = (e: React.MouseEvent) => {
+      console.log('[ProductCardCarousel] handleDescToggle', e)
       e.stopPropagation()
-      setExpandedDesc(!expandedDesc)
+      setExpandedDesc((prev) => !prev)
     }
 
     if (!currentProduct || displayProducts.length === 0) return null
@@ -140,7 +144,10 @@ export const ProductCardCarousel = forwardRef<HTMLDivElement, ProductCardCarouse
               <div
                 key={product.id}
                 className="relative shrink-0 cursor-pointer w-[296px]"
-                onClick={() => handleCardClick(product)}
+                onClick={() => {
+                  setExpandedDesc(false)
+                  handleCardClick(product)
+                }}
               >
                 {/* 当前显示的图片 */}
                 <img
@@ -190,33 +197,37 @@ export const ProductCardCarousel = forwardRef<HTMLDivElement, ProductCardCarouse
                 {/* 底部内容区域 */}
                 <div
                   className={`absolute z-9 w-[280px] min-h-[93px] rounded-[11px] -bottom-[10px] left-1/2 -translate-x-1/2 p-[5px_9px] text-white border border-[rgba(127,127,127,0.4)] bg-[linear-gradient(180deg,rgba(127,127,127,0.33)_100%,rgba(217,217,217,0.63)_20%)] backdrop-blur-[10px] [text-shadow:0_2px_4px_rgba(0,0,0,0.98)] text-[12px] font-normal text-center transition-all duration-300 ${
-                    expandedDesc && index === currentIndex ? 'max-h-[400px]' : ''
+                    expandedDesc && index === currentIndex ? 'max-h-[400px] overflow-y-auto' : 'overflow-hidden'
                   }`}
                 >
-                  <div className="text-[15px] font-semibold mb-[5px] break-all overflow-hidden text-ellipsis line-clamp-1">
+                  <div className="text-[15px] font-semibold mb-[5px] break-all overflow-hidden line-clamp-1">
                     《{product.name}》
                   </div>
-                  <div className="break-all overflow-hidden text-ellipsis line-clamp-1 mb-[5px]">
+                  <div className="break-all overflow-hidden line-clamp-1 mb-[5px]">
                     {product.creators?.slice(0, 3).join('/') || ''}
                   </div>
                   {product.description && (
-                    <>
-                      <div
-                        className={`relative z-10 pt-[12.5px] text-[10px] leading-[14px] break-all overflow-hidden text-ellipsis ${
-                          expandedDesc && index === currentIndex ? 'line-clamp-20' : 'line-clamp-2'
-                        } cursor-pointer`}
-                        onClick={handleDescToggle}
-                      >
-                        {product.description}
-                      </div>
-                      <img
-                        className={`absolute z-11 w-[12px] h-[7px] bottom-[-3.5px] left-1/2 -translate-x-1/2 transition-transform duration-300 ${
-                          expandedDesc && index === currentIndex ? 'rotate-180' : ''
-                        }`}
-                        src={images.works.descTop}
-                        alt="toggle"
-                      />
-                    </>
+                    <div
+                      className={`relative z-10 pt-[12.5px] text-[10px] leading-[14px] break-all cursor-pointer ${
+                        expandedDesc && index === currentIndex
+                          ? ''
+                          : 'overflow-hidden line-clamp-2'
+                      }`}
+                      style={
+                        expandedDesc && index === currentIndex
+                          ? {
+                              display: 'block',
+                              WebkitLineClamp: 'unset',
+                              WebkitBoxOrient: 'unset',
+                              overflow: 'visible',
+                              textOverflow: 'clip',
+                            }
+                          : undefined
+                      }
+                      onClick={handleDescToggle}
+                    >
+                      {product.description}
+                    </div>
                   )}
                 </div>
               </div>
