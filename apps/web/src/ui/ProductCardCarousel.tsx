@@ -125,25 +125,25 @@ export const ProductCardCarousel = forwardRef<HTMLDivElement, ProductCardCarouse
     return (
       <div
         ref={ref}
-        className={`relative z-5 w-[320px] h-[470px] pt-[20px] ${className}`}
+        className={`relative z-5 w-full max-w-[380px] mx-auto aspect-320/470 pt-[4.26%] ${className}`}
         {...props}
       >
         {/* 阴影背景 */}
-        <div className="absolute z-6 bottom-0 w-full h-[448px] rounded-[25px] border border-[#c81cc569] shadow-[0_0_8px_0_rgba(228,21,153,0.33)_inset] filter-[drop-shadow(0_0.6px_1.3px_rgba(0,0,0,0.41))]" />
+        <div className="absolute z-6 bottom-0 w-full h-[95.32%] rounded-[25px] border border-[#c81cc569] shadow-[0_0_8px_0_rgba(228,21,153,0.33)_inset] filter-[drop-shadow(0_0.6px_1.3px_rgba(0,0,0,0.41))]" />
 
         {/* 产品图片区域 */}
-        <div className="relative z-7 w-[296px] h-full mx-auto overflow-hidden -mt-[20px]">
+        <div className="relative z-7 w-[92.5%] h-full mx-auto overflow-hidden -mt-[4.26%]">
           {/* 轮播容器 - 水平滚动 */}
           <div
-            className="flex h-[425px] transition-transform duration-500 ease-in-out"
+            className="flex h-[90.43%] transition-transform duration-500 ease-in-out"
             style={{
-              transform: `translateX(-${currentIndex * 296}px)`,
+              transform: `translateX(-${currentIndex * 100}%)`,
             }}
           >
             {displayProducts.map((product, index) => (
               <div
                 key={product.id}
-                className="relative shrink-0 cursor-pointer w-[296px]"
+                className="relative shrink-0 cursor-pointer w-full"
                 onClick={() => {
                   setExpandedDesc(false)
                   handleCardClick(product)
@@ -160,7 +160,7 @@ export const ProductCardCarousel = forwardRef<HTMLDivElement, ProductCardCarouse
 
                 {/* 分享到X按钮 */}
                 <div
-                  className={`absolute z-8 top-[20px] left-[20px] w-[60px] h-[20px] rounded-[20px] flex justify-center items-center ${
+                  className={`absolute z-8 top-[4.71%] left-[6.25%] w-[18.75%] h-[4.71%] rounded-[20px] flex justify-center items-center ${
                     product.isShared ? 'bg-[#eb1484]' : 'bg-[rgba(0,0,0,0.4)]'
                   }`}
                   onClick={(e) => handleShareClick(e, product)}
@@ -168,22 +168,22 @@ export const ProductCardCarousel = forwardRef<HTMLDivElement, ProductCardCarouse
                   <img
                     src={images.works.toX}
                     alt="X icon"
-                    className="w-[13px] h-[12px] mr-[5px]"
+                    className="w-[21.67%] h-[60%] mr-[8.33%]"
                   />
                   <img
                     src={images.works.toXWhite}
                     alt="X white icon"
-                    className="w-[13px] h-[12px]"
+                    className="w-[21.67%] h-[60%]"
                   />
                   {product.shareCount ? (
-                    <div className="absolute z-8 w-full text-center top-[20px] text-[12px] font-medium text-white [text-shadow:0_1px_1px_rgba(35,35,35,0.8)]">
+                    <div className="absolute z-8 w-full text-center top-full text-[60%] font-medium text-white [text-shadow:0_1px_1px_rgba(35,35,35,0.8)]">
                       {product.shareCount}
                     </div>
                   ) : null}
                 </div>
 
                 {/* 作品类型 */}
-                <div className="absolute z-8 top-[20px] right-[20px] flex justify-center items-center">
+                <div className="absolute z-8 top-[4.71%] right-[6.25%] flex justify-center items-center">
                   <img
                     className="mr-[5px] mt-px w-[14px] h-[12px] invert brightness-100 filter-[drop-shadow(0_1px_1px_rgba(35,35,35,0.8))]"
                     src={`${getWorkTypeInfo(product.type).icon}`}
@@ -196,8 +196,8 @@ export const ProductCardCarousel = forwardRef<HTMLDivElement, ProductCardCarouse
 
                 {/* 底部内容区域 */}
                 <div
-                  className={`absolute z-9 w-[280px] min-h-[93px] rounded-[11px] -bottom-[10px] left-1/2 -translate-x-1/2 p-[5px_9px] text-white border border-[rgba(127,127,127,0.4)] bg-[linear-gradient(180deg,rgba(127,127,127,0.33)_100%,rgba(217,217,217,0.63)_20%)] backdrop-blur-[10px] [text-shadow:0_2px_4px_rgba(0,0,0,0.98)] text-[12px] font-normal text-center transition-all duration-300 ${
-                    expandedDesc && index === currentIndex ? 'max-h-[400px] overflow-y-auto' : 'overflow-hidden'
+                  className={`absolute z-9 w-[87.5%] min-h-[21.88%] rounded-[11px] -bottom-[2.35%] left-1/2 -translate-x-1/2 p-[1.18%_2.81%] text-white border border-[rgba(127,127,127,0.4)] bg-[linear-gradient(180deg,rgba(127,127,127,0.33)_100%,rgba(217,217,217,0.63)_20%)] backdrop-blur-[10px] [text-shadow:0_2px_4px_rgba(0,0,0,0.98)] text-[12px] font-normal text-center transition-all duration-300 ${
+                    expandedDesc && index === currentIndex ? 'max-h-[94.12%] overflow-y-auto' : 'overflow-hidden'
                   }`}
                 >
                   <div className="text-[15px] font-semibold mb-[5px] break-all overflow-hidden line-clamp-1">

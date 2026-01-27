@@ -241,7 +241,7 @@ function Home() {
                   className="contents"
                 >
                   {shouldShowCarousel ? (
-                    <div className="col-span-3 flex justify-center mb-[4px]">
+                    <div className="col-span-3 w-full mb-[4px]">
                       <ProductCardCarousel
                         products={carouselProducts}
                         autoplay={true}
