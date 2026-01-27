@@ -1,6 +1,4 @@
 export { LoginModal } from './Common/LoginModal'
-
-
-// home
+export { TokenAvatar } from './Common/TokenAvatar'
+export { BackButton } from './Common/BackButton'
 export {Banner as HomeBanner} from './Home/HomeBanner'
-export { TokenAvatar } from './TokenAvatar'

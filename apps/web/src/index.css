@@ -76,6 +76,15 @@ body {
   overscroll-behavior-y: contain;
 }
 
+body.work-detail-page {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+body.work-detail-page #root {
+  width: 100%;
+}
+
 .iconfont {
   font-family: "iconfont", serif;
   font-style: normal;

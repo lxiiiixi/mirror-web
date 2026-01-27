@@ -19,6 +19,7 @@ function App() {
   const navigate = useNavigate()
   const location = useLocation()
   const openLoginModal = useLoginModalStore((state) => state.openModal)
+  const isWorkDetail = location.pathname.startsWith('/works/detail')
 
   // 桌面端自动重定向到白皮书网站
   useEffect(() => {
@@ -81,6 +82,18 @@ function App() {
     return null
   }
 
+  if (isWorkDetail) {
+    return (
+      <>
+        <Routes>
+          <Route element={<WorkDetail />} path="/works/detail" />
+          <Route element={<NotFound />} path="*" />
+        </Routes>
+        <LoginModal />
+      </>
+    )
+  }
+
   return (
     <AppLayout
       showWalletBar={true}
@@ -95,12 +108,12 @@ function App() {
       footerItems={footerItems}
       activeFooterIndex={activeFooterIndex}
     >
-          <Routes>
-            <Route element={<Home />} path="/" />
-            <Route element={<UIShowcase />} path="/ui" />
-            <Route element={<WorkDetail />} path="/works/detail" />
-            <Route element={<NotFound />} path="*" />
-          </Routes>
+      <Routes>
+        <Route element={<Home />} path="/" />
+        <Route element={<UIShowcase />} path="/ui" />
+        <Route element={<WorkDetail />} path="/works/detail" />
+        <Route element={<NotFound />} path="*" />
+      </Routes>
       <LoginModal />
     </AppLayout>
   )
