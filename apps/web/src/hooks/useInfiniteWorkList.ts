@@ -102,6 +102,7 @@ export const useInfiniteWorkList = (
 
   const fetchPage = useCallback(
     async (targetPage: number, append: boolean) => {
+      console.log('[useInfiniteWorkList] fetchPage', { targetPage, append })
       if (!enabled || inFlightRef.current) {
         return
       }
@@ -142,6 +143,7 @@ export const useInfiniteWorkList = (
   )
 
   const refresh = useCallback(() => {
+    console.log('[useInfiniteWorkList] refresh')
     setItems([])
     setTotal(0)
     setPage(initialPage)

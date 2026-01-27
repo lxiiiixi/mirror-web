@@ -43,7 +43,6 @@ export interface ArtsApiClientOptions<E = ArtsApiError> {
   token?: string;
   language?: ArtsApiLanguage;
   timeoutMs?: number;
-  fetcher?: typeof fetch;
   errorFormatter?: ArtsApiErrorFormatter<E>;
 }
 
@@ -82,7 +81,6 @@ export class ArtsApiClient<E = ArtsApiError> {
   private token?: string;
   private language?: ArtsApiLanguage;
   private timeoutMs?: number;
-  private fetcher: typeof fetch;
   private errorFormatter: ArtsApiErrorFormatter<E>;
 
   public readonly user: ReturnType<typeof createUserModule<E>>;
@@ -102,7 +100,6 @@ export class ArtsApiClient<E = ArtsApiError> {
     this.token = options.token;
     this.language = options.language;
     this.timeoutMs = options.timeoutMs;
-    this.fetcher = options.fetcher ?? fetch;
     this.errorFormatter = (options.errorFormatter ?? defaultArtsApiErrorFormatter) as ArtsApiErrorFormatter<E>;
 
     this.user = createUserModule(this);
@@ -152,6 +149,8 @@ export class ArtsApiClient<E = ArtsApiError> {
     options: RequestOptions = {},
   ): Promise<Types.ApiResponse<T>> {
     const response = await this.performFetch(method, path, options);
+
+    console.log(`🛜 [ArtsApiClient] API Response(${method}): ${response.url}`, response.status)
 
     if (!response.ok) {
       const error = await this.buildHttpError(method, path, response);
@@ -271,13 +270,15 @@ export class ArtsApiClient<E = ArtsApiError> {
       : undefined;
 
     try {
-      return await this.fetcher(url, {
+      console.log(`🛜 [ArtsApiClient] API Request(${method}): ${url}`)
+      return await fetch(url, {
         method,
         headers,
         body,
         signal: controller?.signal,
       });
     } catch (err) {
+      console.error(`🛜 [ArtsApiClient] API Request Error(${method}): ${url}`, err)
       throw this.formatError({
         type: 'network',
         message: err instanceof Error ? err.message : 'Network error',
