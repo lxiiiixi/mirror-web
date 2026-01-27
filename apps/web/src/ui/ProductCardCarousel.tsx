@@ -1,6 +1,7 @@
 import { HTMLAttributes, forwardRef, useState, useEffect, useRef } from 'react'
 import { ProductData, WorkType } from './ProductCard'
 import { images } from '@mirror/assets'
+import { resolveImageUrl } from '@mirror/utils'
 
 export interface ProductCardCarouselProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -146,7 +147,7 @@ export const ProductCardCarousel = forwardRef<HTMLDivElement, ProductCardCarouse
                   loading="lazy"
                   referrerPolicy="no-referrer"
                   className="w-full h-full rounded-[26px] object-cover bg-[#f5f5f5]"
-                  src={product.coverUrl}
+                  src={resolveImageUrl(product.coverUrl)}
                   alt={product.name}
                 />
 
@@ -252,4 +253,3 @@ export const ProductCardCarousel = forwardRef<HTMLDivElement, ProductCardCarouse
 )
 
 ProductCardCarousel.displayName = 'ProductCardCarousel'
-

@@ -1,5 +1,6 @@
 import { HTMLAttributes, forwardRef } from 'react'
 import { images } from '@mirror/assets'
+import { resolveImageUrl } from '@mirror/utils'
 
 /**
  * 作品类型定义
@@ -115,7 +116,7 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
           <img
             referrerPolicy="no-referrer"
             className="w-full h-[90%] mt-[10%] rounded-[7.5px] object-cover bg-[#f5f5f5]"
-            src={product.coverUrl}
+            src={resolveImageUrl(product.coverUrl)}
             alt={product.name}
           />
         </div>
@@ -171,4 +172,3 @@ export const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
 )
 
 ProductCard.displayName = 'ProductCard'
-

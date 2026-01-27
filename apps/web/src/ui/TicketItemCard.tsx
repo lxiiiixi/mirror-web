@@ -1,5 +1,6 @@
 import { HTMLAttributes, ReactNode, forwardRef, MouseEvent } from 'react'
 import { images } from '@mirror/assets'
+import { resolveImageUrl } from '@mirror/utils'
 
 export type TicketItemCardType = 1 | 2 | 3
 export type TicketItemCardShadow = 'pink' | 'purple'
@@ -166,7 +167,7 @@ export const TicketItemCard = forwardRef<HTMLDivElement, TicketItemCardProps>(
         <div
           className={`ticket-item-card__img-wrapper ${imgShadow} ${isFlipped ? 'order-2' : 'order-1'}`}
         >
-          <img className="ticket-item-card__img" src={data.coverUrl} alt={data.name} />
+          <img className="ticket-item-card__img" src={resolveImageUrl(data.coverUrl)} alt={data.name} />
         </div>
 
         <div className="ticket-item-card__content">

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { images } from '@mirror/assets'
 import { useInfiniteWorkList } from '../hooks/useInfiniteWorkList'
+import { resolveImageUrl } from '@mirror/utils'
 import {
   Notice,
   ProductCard,
@@ -68,12 +69,18 @@ function Home() {
   useEffect(() => {
     if (typeof window === 'undefined') return
     refresh()
-    const scrollTarget = document.querySelector('main.content')
-    setScrollElement((scrollTarget as HTMLElement | null) ?? window)
+  }, [refresh])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const scrollTarget = document.querySelector('main.content') as HTMLElement | null
+    const canScroll =
+      scrollTarget && scrollTarget.scrollHeight > scrollTarget.clientHeight
+    setScrollElement(canScroll ? scrollTarget : window)
     return () => {
       setScrollElement(null)
     }
-  }, [refresh, setScrollElement])
+  }, [items.length, setScrollElement])
 
   const tabs = useMemo<ProjectTabItem[]>(
     () => [
@@ -100,9 +107,11 @@ function Home() {
         (work as { name?: string }).name ||
         ''
       const coverUrl =
-        (work as { cover?: string }).cover ||
-        (work as { cover_url?: string }).cover_url ||
-        ''
+        resolveImageUrl(
+          (work as { cover?: string }).cover ||
+            (work as { cover_url?: string }).cover_url ||
+            '',
+        )
       const shareCount =
         Number(
           (work as { share_count?: number | string }).share_count ??
@@ -132,9 +141,11 @@ function Home() {
       const workTypeValue =
         typeof rawWorkType === 'string' ? Number(rawWorkType) : rawWorkType
       const coverUrl =
-        (work as { cover?: string }).cover ||
-        (work as { cover_url?: string }).cover_url ||
-        ''
+        resolveImageUrl(
+          (work as { cover?: string }).cover ||
+            (work as { cover_url?: string }).cover_url ||
+            '',
+        )
       const name =
         (work as { work_name?: string }).work_name ||
         (work as { name?: string }).name ||

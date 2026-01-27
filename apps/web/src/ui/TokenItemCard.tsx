@@ -1,5 +1,6 @@
 import { CSSProperties, HTMLAttributes, ReactNode, forwardRef, MouseEvent } from 'react'
 import { images } from '@mirror/assets'
+import { resolveImageUrl } from '@mirror/utils'
 
 export interface TokenItemCardData {
   name: string
@@ -61,7 +62,7 @@ export const TokenItemCard = forwardRef<HTMLDivElement, TokenItemCardProps>(
         <div className="card-wrapper">
           <div className="ticket-item-card__img-wrapper">
             <div className="avatar-border">
-              <img className="cover-img" src={data.coverUrl} alt={data.name} />
+              <img className="cover-img" src={resolveImageUrl(data.coverUrl)} alt={data.name} />
             </div>
           </div>
           <div className="ticket-item-card__content">

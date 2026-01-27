@@ -119,17 +119,26 @@ export const useInfiniteWorkList = (
         })
 
         const payload = response.data as WorkListResponse
-        const nextTotal =
-          typeof payload.total === 'number'
-            ? payload.total
-            : payload.list.length
-
         setItems((prev) => {
           const nextItems = append ? [...prev, ...payload.list] : payload.list
-          setHasMore(nextItems.length < nextTotal)
+          const rawTotal = (payload as { total?: number | string }).total
+          const totalNumber =
+            typeof rawTotal === 'number' || typeof rawTotal === 'string'
+              ? Number(rawTotal)
+              : NaN
+          const hasValidTotal = Number.isFinite(totalNumber) && totalNumber >= 0
+          setHasMore(
+            hasValidTotal ? nextItems.length < totalNumber : payload.list.length === pageSize,
+          )
           return nextItems
         })
-        setTotal(nextTotal)
+        setTotal(
+          typeof payload.total === 'number'
+            ? payload.total
+            : typeof payload.total === 'string'
+              ? Number(payload.total) || 0
+              : payload.list.length,
+        )
         setPage(targetPage)
         setStatus('success')
       } catch (err) {

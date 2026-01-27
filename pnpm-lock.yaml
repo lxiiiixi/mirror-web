@@ -63,6 +63,9 @@ importers:
       '@mirror/locales':
         specifier: workspace:*
         version: link:../../packages/locales
+      '@mirror/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       i18next:
         specifier: ^25.7.4
         version: 25.7.4(typescript@5.9.3)
@@ -142,6 +145,8 @@ importers:
         version: 18.3.1
 
   packages/locales: {}
+
+  packages/utils: {}
 
 packages:
 

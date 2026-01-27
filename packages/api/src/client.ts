@@ -270,7 +270,7 @@ export class ArtsApiClient<E = ArtsApiError> {
       : undefined;
 
     try {
-      console.log(`🛜 [ArtsApiClient] API Request(${method}): ${url}`)
+      console.log(`🛜 [ArtsApiClient] ${method} => ${url}`)
       return await fetch(url, {
         method,
         headers,
@@ -278,7 +278,7 @@ export class ArtsApiClient<E = ArtsApiError> {
         signal: controller?.signal,
       });
     } catch (err) {
-      console.error(`🛜 [ArtsApiClient] API Request Error(${method}): ${url}`, err)
+      console.error(`🛜 [ArtsApiClient] Error: ${method} ${url}`, err)
       throw this.formatError({
         type: 'network',
         message: err instanceof Error ? err.message : 'Network error',
