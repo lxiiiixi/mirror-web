@@ -9,7 +9,10 @@ function Home() {
     <div className="">
       <Notice message={t('notice.defaultMessage')} />
       <HomeBanner autoplay={true} interval={4000} />
-      <div className="w-full h-[1200px] bg-red-100"></div>
+      {/* 在这里加一个 Tab 组件，用于切换 RWA 和 Token ，内容都从 work 列表中筛选出来 */}
+      <div className="w-full h-[1200px] bg-red-100">
+        {/* 列表展示 */}
+      </div>
     </div>
   )
 }
