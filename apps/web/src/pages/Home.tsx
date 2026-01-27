@@ -105,29 +105,23 @@ function Home() {
   const tokenCards = useMemo(() => {
     return tokenItems.map((work) => {
       const name =
-        (work as { work_name?: string }).work_name ||
-        (work as { name?: string }).name ||
+        (work).name ||
         ''
-      const rawWorkType =
-        (work as { work_type?: number | string }).work_type ??
-        (work as { type?: number | string }).type ??
-        4
-      const workTypeValue =
-        typeof rawWorkType === 'string' ? Number(rawWorkType) : rawWorkType
       const coverUrl =
         resolveImageUrl(
-          (work as { cover?: string }).cover ||
-            (work as { cover_url?: string }).cover_url ||
+          (work).cover_url ||
             '',
         )
       const shareCount =
         Number(
-          (work as { share_count?: number | string }).share_count ??
-            (work as { shareCount?: number | string }).shareCount ??
+          (work).share_count ??
             0,
         ) || 0
       const progressPercent = Math.min(100, Math.max(0, (shareCount * 500) / 20000))
       const balanceLeft = Math.max(0, 20000 - shareCount * 5)
+      const showTokenBorder = true
+        // (work).show_token_border ||
+        
       return {
         id: work.id,
         name,
@@ -136,7 +130,8 @@ function Home() {
         progressPercent,
         progressText: `${t('tokenItemCard.progress')} ${progressPercent.toFixed(0)}%`,
         balanceText: `${t('tokenItemCard.balance')} ${balanceLeft}`,
-        rawType: workTypeValue,
+        showTokenBorder,
+        rawType: work.type,
       }
     })
   }, [t, tokenItems])
@@ -284,6 +279,7 @@ function Home() {
                   name: token.name,
                   coverUrl: token.coverUrl,
                   shareCount: token.shareCount,
+                  showTokenBorder: token.showTokenBorder,
                   progressPercent: token.progressPercent,
                   progressText: token.progressText,
                   balanceText: token.balanceText,

@@ -1,10 +1,12 @@
 import { CSSProperties, HTMLAttributes, ReactNode, forwardRef, MouseEvent } from 'react'
 import { images } from '@mirror/assets'
 import { resolveImageUrl } from '@mirror/utils'
+import { TokenAvatar } from '../components'
 
 export interface TokenItemCardData {
   name: string
   coverUrl: string
+  showTokenBorder: boolean
   shareCount?: number
   progressPercent?: number
   progressText?: ReactNode
@@ -61,9 +63,10 @@ export const TokenItemCard = forwardRef<HTMLDivElement, TokenItemCardProps>(
       >
         <div className="card-wrapper">
           <div className="ticket-item-card__img-wrapper">
-            <div className="avatar-border">
+            {/* <div className="avatar-border">
               <img className="cover-img" src={resolveImageUrl(data.coverUrl)} alt={data.name} />
-            </div>
+            </div> */}
+            <TokenAvatar src={resolveImageUrl(data.coverUrl)} alt={data.name} showTokenBorder={data.showTokenBorder} />
           </div>
           <div className="ticket-item-card__content">
             <div className="ticket-item-card__content-title">

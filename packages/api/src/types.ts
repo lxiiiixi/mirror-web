@@ -217,20 +217,23 @@ export interface WorkListParams extends PaginationParams {
 }
 
 export interface WorkSummary {
+  cover_url: string;
+  creator_name: string;
+  description: string;
   id: number;
-  work_name: string;
-  work_type: number;
-  author: string;
-  cover: string;
-  work_description: string;
-  create_time: ISODateTimeString;
+  is_like: number;
+  is_tread: number;
+  like_count: number;
+  name: string;
+  share_count: number;
+  token_cover_url: string;
+  tread_count: number;
+  type: number;
 }
 
 export interface WorkListResponseData {
   list: WorkSummary[];
   total: number;
-  page: number;
-  page_size: number;
 }
 
 export interface WorkDetailParams {
@@ -238,20 +241,23 @@ export interface WorkDetailParams {
 }
 
 export interface WorkDetailResponseData {
-  work_id: number;
-  work_type: number;
-  work_name: string;
-  work_creator_name: string;
+  can_start_tge: number;
+  creator_id: number;
+  number_of_participants: number;
+  premiere_time: string;
+  share_count: number;
+  show_token_border: boolean;
+  token_border_type: number;
+  token_cover_url: string;
+  token_name: string;
+  token_status: number;
+  unlocked_chapter_count: number;
   work_cover_url: string;
+  work_creator_name: string;
   work_description: string;
-  signed_in: boolean;
-  ever_signed_in: boolean;
-  joined_community: boolean;
-  invite_count: number;
-  token_balance: number;
-  my_invite_code?: string;
-  my_invite_url?: string;
-  my_invite_count?: number;
+  work_name: string;
+  work_total_chapter: number;
+  work_type: number;
 }
 
 export interface WorkUploadRequest {

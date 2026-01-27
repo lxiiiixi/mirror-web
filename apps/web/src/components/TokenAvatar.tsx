@@ -1,11 +1,11 @@
-import { CSSProperties, HTMLAttributes } from 'react'
+import {  HTMLAttributes } from 'react'
 import { images } from '@mirror/assets'
 import { resolveImageUrl } from '@mirror/utils'
 
 export interface TokenAvatarProps extends HTMLAttributes<HTMLDivElement> {
-  src?: string | null
+  src: string
+  showTokenBorder: boolean
   alt?: string
-  showTokenBorder?: boolean
   size?: number
   imageSize?: number
 }
@@ -13,21 +13,25 @@ export interface TokenAvatarProps extends HTMLAttributes<HTMLDivElement> {
 export function TokenAvatar({
   src,
   alt = 'token',
-  showTokenBorder = true,
+  showTokenBorder,
   size = 80,
   imageSize,
   className = '',
   ...props
 }: TokenAvatarProps) {
+  const resolvedShowTokenBorder =
+    showTokenBorder === undefined || showTokenBorder === null
+      ? true
+      : Boolean(showTokenBorder)
   const resolvedImageSize = imageSize ?? Math.round(size * 0.8125)
-  const styleVars: CSSProperties = {
+  const styleVars: Record<string, string> = {
     '--token-avatar-size': `${size}px`,
     '--token-avatar-image-size': `${resolvedImageSize}px`,
   }
 
   return (
     <div
-      className={`token-avatar ${showTokenBorder ? '' : 'no-border'} ${className}`.trim()}
+      className={`token-avatar ${resolvedShowTokenBorder ? '' : 'no-border'} ${className}`.trim()}
       style={styleVars}
       {...props}
     >
