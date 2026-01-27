@@ -20,7 +20,7 @@ export function ProductShare({
     <div className="relative overflow-hidden rounded-[12px]">
       {coverUrl ? (
         <img
-          className="absolute inset-0 h-full w-full object-cover bg-[#f5f5f5]"
+          className="absolute z-1 top-0 left-0 w-full h-full object-cover bg-[#f5f5f5]"
           src={resolveImageUrl(coverUrl)}
           alt="cover"
         />
