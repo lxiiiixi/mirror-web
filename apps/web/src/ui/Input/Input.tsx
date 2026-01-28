@@ -1,4 +1,5 @@
 import { forwardRef, InputHTMLAttributes } from "react";
+import "./input.css";
 
 export type InputSize = "sm" | "md" | "lg";
 
@@ -8,12 +9,10 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
     ({ inputSize = "md", className = "", ...props }, ref) => {
-        const classes = ["input", `input-${inputSize}`, className]
-            .filter(Boolean)
-            .join(" ");
+        const classes = ["input", `input-${inputSize}`, className].filter(Boolean).join(" ");
 
         return <input ref={ref} className={classes} {...props} />;
-    }
+    },
 );
 
 Input.displayName = "Input";

@@ -1,7 +1,5 @@
 @import "tailwindcss";
 @import "@mirror/assets/fonts.css";
-@import "./ui/Button/Button.css";
-@import "./ui/Input/Input.css";
 
 :root {
     /* 自定义主题色配置 - Mirror UI */

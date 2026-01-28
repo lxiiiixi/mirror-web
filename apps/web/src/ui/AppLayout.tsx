@@ -1,550 +1,557 @@
-import { images } from "@mirror/assets"
+import { images } from "@mirror/assets";
 import {
-  type HTMLAttributes,
-  type ReactNode,
-  type UIEvent,
-  forwardRef,
-  useEffect,
-  useRef,
-  useState,
-} from "react"
+    type HTMLAttributes,
+    type ReactNode,
+    type UIEvent,
+    forwardRef,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 
 export interface AppLayoutFooterItem {
-  label: ReactNode
-  icon: string
-  activeIcon?: string
-  position?: "left" | "center" | "right"
-  key?: string | number
-  onClick?: () => void
+    label: ReactNode;
+    icon: string;
+    activeIcon?: string;
+    position?: "left" | "center" | "right";
+    key?: string | number;
+    onClick?: () => void;
 }
 
 export interface AppLayoutProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactNode
-  showWalletBar?: boolean
-  showPageNav?: boolean
-  scrollShadow?: boolean
-  pageTitle?: ReactNode
-  headerRight?: ReactNode
-  languageLabel?: ReactNode
-  assetsLabel?: ReactNode
-  loginLabel?: ReactNode
-  isLoggedIn?: boolean
-  langIconSrc?: string
-  logoSrc?: string
-  backIconSrc?: string
-  footerBgSrc?: string
-  onLanguageClick?: () => void
-  onLogoClick?: () => void
-  onWalletClick?: () => void
-  onBack?: () => void
-  footerItems?: AppLayoutFooterItem[]
-  activeFooterIndex?: number
-  showFooter?: boolean
+    children: ReactNode;
+    showWalletBar?: boolean;
+    showPageNav?: boolean;
+    scrollShadow?: boolean;
+    pageTitle?: ReactNode;
+    headerRight?: ReactNode;
+    languageLabel?: ReactNode;
+    assetsLabel?: ReactNode;
+    loginLabel?: ReactNode;
+    isLoggedIn?: boolean;
+    langIconSrc?: string;
+    logoSrc?: string;
+    backIconSrc?: string;
+    footerBgSrc?: string;
+    onLanguageClick?: () => void;
+    onLogoClick?: () => void;
+    onWalletClick?: () => void;
+    onBack?: () => void;
+    footerItems?: AppLayoutFooterItem[];
+    activeFooterIndex?: number;
+    showFooter?: boolean;
 }
 
-const HEADER_HEIGHT = 55
-const FOOTER_HEIGHT = 86
+const HEADER_HEIGHT = 55;
+const FOOTER_HEIGHT = 86;
 
 export const AppLayout = forwardRef<HTMLDivElement, AppLayoutProps>(
-  (
-    {
-      children,
-      showWalletBar = true,
-      showPageNav = false,
-      scrollShadow = true,
-      pageTitle,
-      headerRight,
-      languageLabel = "Language",
-      assetsLabel = "Assets",
-      loginLabel = "Login",
-      isLoggedIn = false,
-      langIconSrc,
-      logoSrc = images.logo,
-      backIconSrc,
-      footerBgSrc,
-      onLanguageClick,
-      onLogoClick,
-      onWalletClick,
-      onBack,
-      footerItems = [],
-      activeFooterIndex = 0,
-      showFooter = true,
-      className = "",
-      ...props
-    },
-    ref
-  ) => {
-    const shouldShowHeader = showWalletBar || showPageNav
-    const shouldShowFooter = showFooter && footerItems.length > 0
-    const footerBackground = footerBgSrc ?? images.nav.footBarBg
-    const contentPaddingTop = shouldShowHeader ? HEADER_HEIGHT : 0
-    const contentPaddingBottom = shouldShowFooter ? FOOTER_HEIGHT : 0
-    const [headerOffset, setHeaderOffset] = useState(0)
-    const [isScrolled, setIsScrolled] = useState(false)
-    const contentRef = useRef<HTMLElement | null>(null)
-    const lastScrollTop = useRef(0)
-    const headerOffsetRef = useRef(0)
-    const rafId = useRef<number | null>(null)
+    (
+        {
+            children,
+            showWalletBar = true,
+            showPageNav = false,
+            scrollShadow = true,
+            pageTitle,
+            headerRight,
+            languageLabel = "Language",
+            assetsLabel = "Assets",
+            loginLabel = "Login",
+            isLoggedIn = false,
+            langIconSrc,
+            logoSrc = images.logo,
+            backIconSrc,
+            footerBgSrc,
+            onLanguageClick,
+            onLogoClick,
+            onWalletClick,
+            onBack,
+            footerItems = [],
+            activeFooterIndex = 0,
+            showFooter = true,
+            className = "",
+            ...props
+        },
+        ref,
+    ) => {
+        const shouldShowHeader = showWalletBar || showPageNav;
+        const shouldShowFooter = showFooter && footerItems.length > 0;
+        const footerBackground = footerBgSrc ?? images.nav.footBarBg;
+        const contentPaddingTop = shouldShowHeader ? HEADER_HEIGHT : 0;
+        const contentPaddingBottom = shouldShowFooter ? FOOTER_HEIGHT : 0;
+        const [headerOffset, setHeaderOffset] = useState(0);
+        const [isScrolled, setIsScrolled] = useState(false);
+        const contentRef = useRef<HTMLElement | null>(null);
+        const lastScrollTop = useRef(0);
+        const headerOffsetRef = useRef(0);
+        const rafId = useRef<number | null>(null);
 
-    const getScrollTop = () => {
-      const target = contentRef.current
-      if (target && target.scrollHeight > target.clientHeight) {
-        return target.scrollTop
-      }
-      return window.scrollY || document.documentElement.scrollTop || 0
-    }
+        const getScrollTop = () => {
+            const target = contentRef.current;
+            if (target && target.scrollHeight > target.clientHeight) {
+                return target.scrollTop;
+            }
+            return window.scrollY || document.documentElement.scrollTop || 0;
+        };
 
-    const updateScrollState = () => {
-      const currentScrollTop = getScrollTop()
+        const updateScrollState = () => {
+            const currentScrollTop = getScrollTop();
 
-      // Background only shows when not at top
-      const nextScrolled = currentScrollTop > 0
-      setIsScrolled(nextScrolled)
+            // Background only shows when not at top
+            const nextScrolled = currentScrollTop > 0;
+            setIsScrolled(nextScrolled);
 
-      // At top: reset header
-      if (currentScrollTop <= 0) {
-        headerOffsetRef.current = 0
-        setHeaderOffset(0)
-        lastScrollTop.current = 0
-        return
-      }
+            // At top: reset header
+            if (currentScrollTop <= 0) {
+                headerOffsetRef.current = 0;
+                setHeaderOffset(0);
+                lastScrollTop.current = 0;
+                return;
+            }
 
-      const delta = currentScrollTop - lastScrollTop.current
+            const delta = currentScrollTop - lastScrollTop.current;
 
-      // Scrolling up (finger up, content down) - hide header
-      if (delta > 0) {
-        const newOffset = Math.min(
-          HEADER_HEIGHT,
-          headerOffsetRef.current + delta
-        )
-        headerOffsetRef.current = newOffset
-        setHeaderOffset(newOffset)
-      }
-      // Scrolling down (finger down, content up) - show header
-      else if (delta < 0) {
-        const newOffset = Math.max(0, headerOffsetRef.current + delta)
-        headerOffsetRef.current = newOffset
-        setHeaderOffset(newOffset)
-      }
+            // Scrolling up (finger up, content down) - hide header
+            if (delta > 0) {
+                const newOffset = Math.min(HEADER_HEIGHT, headerOffsetRef.current + delta);
+                headerOffsetRef.current = newOffset;
+                setHeaderOffset(newOffset);
+            }
+            // Scrolling down (finger down, content up) - show header
+            else if (delta < 0) {
+                const newOffset = Math.max(0, headerOffsetRef.current + delta);
+                headerOffsetRef.current = newOffset;
+                setHeaderOffset(newOffset);
+            }
 
-      lastScrollTop.current = currentScrollTop
-    }
+            lastScrollTop.current = currentScrollTop;
+        };
 
-    const handleScroll = () => {
-      if (rafId.current) {
-        cancelAnimationFrame(rafId.current)
-      }
-      rafId.current = requestAnimationFrame(() => {
-        updateScrollState()
-      })
-    }
+        const handleScroll = () => {
+            if (rafId.current) {
+                cancelAnimationFrame(rafId.current);
+            }
+            rafId.current = requestAnimationFrame(() => {
+                updateScrollState();
+            });
+        };
 
-    const handleContentScroll = (_event: UIEvent<HTMLElement>) => {
-      handleScroll()
-    }
+        const handleContentScroll = (_event: UIEvent<HTMLElement>) => {
+            handleScroll();
+        };
 
-    useEffect(() => {
-      window.addEventListener("scroll", handleScroll, { passive: true })
-      return () => {
-        window.removeEventListener("scroll", handleScroll)
-        if (rafId.current) {
-          cancelAnimationFrame(rafId.current)
-        }
-      }
-    }, [])
+        useEffect(() => {
+            window.addEventListener("scroll", handleScroll, { passive: true });
+            return () => {
+                window.removeEventListener("scroll", handleScroll);
+                if (rafId.current) {
+                    cancelAnimationFrame(rafId.current);
+                }
+            };
+        }, []);
 
-    return (
-      <div ref={ref} className={`app-layout ${className}`} {...props}>
-        {shouldShowHeader ? (
-          <div className={`header ${shouldShowHeader ? "is-show" : ""}`}>
-            <div
-              className={`wrapper ${
-                scrollShadow && isScrolled ? "scroll-shadow" : ""
-              } ${headerOffset >= HEADER_HEIGHT ? "is-hidden" : ""}`}
-              style={{
-                transform: `translateY(-${headerOffset}px)`,
-              }}
-            >
-              {showWalletBar ? (
-                <>
-                  <button
-                    className="header-item"
-                    type="button"
-                    onClick={onLanguageClick}
-                  >
-                    {langIconSrc ? (
-                      <img
-                        className="lang-icon"
-                        src={langIconSrc || "/placeholder.svg"}
-                        alt=""
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <svg className="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                      </svg>
-                    )}
-                    <span className="lang">{languageLabel}</span>
-                  </button>
+        return (
+            <div ref={ref} className={`app-layout ${className}`} {...props}>
+                {shouldShowHeader ? (
+                    <div className={`header ${shouldShowHeader ? "is-show" : ""}`}>
+                        <div
+                            className={`wrapper ${
+                                scrollShadow && isScrolled ? "scroll-shadow" : ""
+                            } ${headerOffset >= HEADER_HEIGHT ? "is-hidden" : ""}`}
+                            style={{
+                                transform: `translateY(-${headerOffset}px)`,
+                            }}
+                        >
+                            {showWalletBar ? (
+                                <>
+                                    <button
+                                        className="header-item"
+                                        type="button"
+                                        onClick={onLanguageClick}
+                                    >
+                                        {langIconSrc ? (
+                                            <img
+                                                className="lang-icon"
+                                                src={langIconSrc || "/placeholder.svg"}
+                                                alt=""
+                                                aria-hidden="true"
+                                            />
+                                        ) : (
+                                            <svg
+                                                className="lang-icon"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                            >
+                                                <circle cx="12" cy="12" r="10" />
+                                                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                                            </svg>
+                                        )}
+                                        <span className="lang">{languageLabel}</span>
+                                    </button>
 
-                  <div className="nav-item-logo">
-                    <button
-                      className="logo"
-                      type="button"
-                      onClick={onLogoClick}
-                      aria-label="Home"
-                    >
-                      {logoSrc ? <img src={logoSrc} alt="logo" aria-hidden="true" /> : null}
-                    </button>
-                  </div>
+                                    <div className="nav-item-logo">
+                                        <button
+                                            className="logo"
+                                            type="button"
+                                            onClick={onLogoClick}
+                                            aria-label="Home"
+                                        >
+                                            {logoSrc ? (
+                                                <img src={logoSrc} alt="logo" aria-hidden="true" />
+                                            ) : null}
+                                        </button>
+                                    </div>
 
-                  <button
-                    className="header-item connector"
-                    type="button"
-                    onClick={onWalletClick}
-                  >
-                    <span
-                      className={`connect-btn ${isLoggedIn ? "assets" : ""}`}
-                    >
-                      <span className="text">
-                        {isLoggedIn ? assetsLabel : loginLabel}
-                      </span>
-                    </span>
-                  </button>
-                </>
-              ) : null}
+                                    <button
+                                        className="header-item connector"
+                                        type="button"
+                                        onClick={onWalletClick}
+                                    >
+                                        <span
+                                            className={`connect-btn ${isLoggedIn ? "assets" : ""}`}
+                                        >
+                                            <span className="text">
+                                                {isLoggedIn ? assetsLabel : loginLabel}
+                                            </span>
+                                        </span>
+                                    </button>
+                                </>
+                            ) : null}
 
-              {showPageNav ? (
-                <>
-                  <button
-                    className="page-back"
-                    type="button"
-                    onClick={onBack}
-                    aria-label="Back"
-                  >
-                    {backIconSrc ? (
-                      <img src={backIconSrc || "/placeholder.svg"} alt="" aria-hidden="true" />
-                    ) : null}
-                  </button>
-                  <div className="page-title">{pageTitle}</div>
-                  <div className="header-right">{headerRight}</div>
-                </>
-              ) : null}
-            </div>
-          </div>
-        ) : null}
+                            {showPageNav ? (
+                                <>
+                                    <button
+                                        className="page-back"
+                                        type="button"
+                                        onClick={onBack}
+                                        aria-label="Back"
+                                    >
+                                        {backIconSrc ? (
+                                            <img
+                                                src={backIconSrc || "/placeholder.svg"}
+                                                alt=""
+                                                aria-hidden="true"
+                                            />
+                                        ) : null}
+                                    </button>
+                                    <div className="page-title">{pageTitle}</div>
+                                    <div className="header-right">{headerRight}</div>
+                                </>
+                            ) : null}
+                        </div>
+                    </div>
+                ) : null}
 
-        <main
-          className="content"
-          ref={contentRef}
-          onScroll={handleContentScroll}
-          style={{
-            paddingTop: `${contentPaddingTop}px`,
-            paddingBottom: `${contentPaddingBottom}px`,
-            paddingLeft: "15px",
-            paddingRight: "15px",
-          }}
-        >
-          {children}
-        </main>
-
-        {shouldShowFooter ? (
-          <footer
-            className="footer-nav"
-            style={{
-              backgroundImage: `url(${footerBackground})`,
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-              backgroundSize: "100% 100%",
-            }}
-          >
-            {footerItems.map((item, index) => {
-              const isActive = index === activeFooterIndex
-              const positionClass = item.position ? `${item.position}-nav` : ""
-              const iconSrc = isActive
-                ? item.activeIcon || item.icon
-                : item.icon
-              return (
-                <button
-                  key={item.key ?? index}
-                  type="button"
-                  className={`nav-item ${positionClass} ${isActive ? "active" : ""}`}
-                  onClick={item.onClick}
+                <main
+                    className="content"
+                    ref={contentRef}
+                    onScroll={handleContentScroll}
+                    style={{
+                        paddingTop: `${contentPaddingTop}px`,
+                        paddingBottom: `${contentPaddingBottom}px`,
+                        paddingLeft: "15px",
+                        paddingRight: "15px",
+                    }}
                 >
-                  <span className="pr-icon">
-                    <img
-                      className="nav-icon"
-                      src={iconSrc || "/placeholder.svg"}
-                      alt=""
-                      aria-hidden="true"
-                    />
-                  </span>
-                  <span className="pr-text">
-                    <span className="nav-text">{item.label}</span>
-                  </span>
-                </button>
-              )
-            })}
-          </footer>
-        ) : null}
+                    {children}
+                </main>
 
-        <style jsx>{`
-          .app-layout {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-          }
+                {shouldShowFooter ? (
+                    <footer
+                        className="footer-nav"
+                        style={{
+                            backgroundImage: `url(${footerBackground})`,
+                            backgroundRepeat: "no-repeat",
+                            backgroundPosition: "center",
+                            backgroundSize: "100% 100%",
+                        }}
+                    >
+                        {footerItems.map((item, index) => {
+                            const isActive = index === activeFooterIndex;
+                            const positionClass = item.position ? `${item.position}-nav` : "";
+                            const iconSrc = isActive ? item.activeIcon || item.icon : item.icon;
+                            return (
+                                <button
+                                    key={item.key ?? index}
+                                    type="button"
+                                    className={`nav-item ${positionClass} ${isActive ? "active" : ""}`}
+                                    onClick={item.onClick}
+                                >
+                                    <span className="pr-icon">
+                                        <img
+                                            className="nav-icon"
+                                            src={iconSrc || "/placeholder.svg"}
+                                            alt=""
+                                            aria-hidden="true"
+                                        />
+                                    </span>
+                                    <span className="pr-text">
+                                        <span className="nav-text">{item.label}</span>
+                                    </span>
+                                </button>
+                            );
+                        })}
+                    </footer>
+                ) : null}
 
-          .content {
-            width: 100vw;
-            flex: 1;
-            min-height: 0;
-            overflow-y: auto;
-          }
+                <style jsx>{`
+                    .app-layout {
+                        position: relative;
+                        min-height: 100vh;
+                        display: flex;
+                        flex-direction: column;
+                    }
 
-          .header {
-            position: relative;
-            color: #fff;
-            z-index: 99;
-          }
+                    .content {
+                        width: 100vw;
+                        flex: 1;
+                        min-height: 0;
+                        overflow-y: auto;
+                    }
 
-          .wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 999;
-            padding: 0 15px;
-            height: ${HEADER_HEIGHT}px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition:
-              transform 0.15s ease-out,
-              background-color 0.2s ease;
-            will-change: transform, background-color;
-            background: transparent;
-          }
+                    .header {
+                        position: relative;
+                        color: #fff;
+                        z-index: 99;
+                    }
 
-          .wrapper.scroll-shadow {
-            background: rgb(18 9 44 / 90%);
-          }
+                    .wrapper {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        z-index: 999;
+                        padding: 0 15px;
+                        height: ${HEADER_HEIGHT}px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        transition:
+                            transform 0.15s ease-out,
+                            background-color 0.2s ease;
+                        will-change: transform, background-color;
+                        background: transparent;
+                    }
 
-          .wrapper.is-hidden {
-            pointer-events: none;
-          }
+                    .wrapper.scroll-shadow {
+                        background: rgb(18 9 44 / 90%);
+                    }
 
-          .header-item {
-            width: 90px;
-            height: 27px;
-            border-radius: 4px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 500;
-            padding: 0;
-            border: none;
-            background: transparent;
-            color: inherit;
-            cursor: pointer;
-          }
+                    .wrapper.is-hidden {
+                        pointer-events: none;
+                    }
 
-          .header-item .connect-btn {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--color-primary);
-            border-radius: 4px;
-          }
+                    .header-item {
+                        width: 90px;
+                        height: 27px;
+                        border-radius: 4px;
+                        overflow: hidden;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 12px;
+                        font-weight: 500;
+                        padding: 0;
+                        border: none;
+                        background: transparent;
+                        color: inherit;
+                        cursor: pointer;
+                    }
 
-          .header-item .connect-btn.assets {
-            background: var(--gradient-primary);
-          }
+                    .header-item .connect-btn {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: var(--color-primary);
+                        border-radius: 4px;
+                    }
 
-          .nav-item-logo {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
+                    .header-item .connect-btn.assets {
+                        background: var(--gradient-primary);
+                    }
 
-          .logo {
-            cursor: pointer;
-            width: 119px;
-            height: 31px;
-            border: none;
-            background: transparent;
-            padding: 0;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-          }
+                    .nav-item-logo {
+                        flex-grow: 1;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
 
-          .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-          }
+                    .logo {
+                        cursor: pointer;
+                        width: 119px;
+                        height: 31px;
+                        border: none;
+                        background: transparent;
+                        padding: 0;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
 
-          .logo-text {
-            font-size: 18px;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 2px;
-          }
+                    .logo img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                        display: block;
+                    }
 
-          .lang-icon {
-            width: 16px;
-            height: 16px;
-            margin-right: 5px;
-          }
+                    .logo-text {
+                        font-size: 18px;
+                        font-weight: 700;
+                        color: #fff;
+                        letter-spacing: 2px;
+                    }
 
-          .lang {
-            font-size: 12px;
-            font-weight: 700;
-          }
+                    .lang-icon {
+                        width: 16px;
+                        height: 16px;
+                        margin-right: 5px;
+                    }
 
-          .connector .text {
-            font-size: 12px;
-            font-weight: 700;
-            line-height: 16px;
-            text-align: left;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            overflow: hidden;
-          }
+                    .lang {
+                        font-size: 12px;
+                        font-weight: 700;
+                    }
 
-          .page-back {
-            z-index: 10;
-            width: 20px;
-            height: 20px;
-            background: transparent;
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-          }
+                    .connector .text {
+                        font-size: 12px;
+                        font-weight: 700;
+                        line-height: 16px;
+                        text-align: left;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 1;
+                        overflow: hidden;
+                    }
 
-          .page-back img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-          }
+                    .page-back {
+                        z-index: 10;
+                        width: 20px;
+                        height: 20px;
+                        background: transparent;
+                        border: none;
+                        padding: 0;
+                        cursor: pointer;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
 
-          .page-title {
-            flex: 1;
-            text-align: center;
-            font-size: 16px;
-            font-weight: 700;
-            color: #fff;
-          }
+                    .page-back img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                        display: block;
+                    }
 
-          .header-right {
-            position: absolute;
-            right: 10px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-          }
+                    .page-title {
+                        flex: 1;
+                        text-align: center;
+                        font-size: 16px;
+                        font-weight: 700;
+                        color: #fff;
+                    }
 
-          .footer-nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            width: 265px;
-            height: ${FOOTER_HEIGHT}px;
-            position: fixed;
-            z-index: 90;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            border: none;
-          }
+                    .header-right {
+                        position: absolute;
+                        right: 10px;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 8px;
+                    }
 
-          .footer-nav .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-            background: transparent;
-            border: none;
-          }
+                    .footer-nav {
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: center;
+                        width: 265px;
+                        height: ${FOOTER_HEIGHT}px;
+                        position: fixed;
+                        z-index: 90;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        margin: 0 auto;
+                        border: none;
+                    }
 
-          .pr-icon {
-            position: relative;
-            width: 72px;
-            height: 45px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
+                    .footer-nav .nav-item {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        flex: 1;
+                        background: transparent;
+                        border: none;
+                    }
 
-          .pr-text {
-            position: relative;
-            width: 72px;
-            height: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
+                    .pr-icon {
+                        position: relative;
+                        width: 72px;
+                        height: 45px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
 
-          .footer-nav .nav-icon {
-            margin-top: 13px;
-            width: 25px;
-            height: 25px;
-          }
+                    .pr-text {
+                        position: relative;
+                        width: 72px;
+                        height: 15px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
 
-          .footer-nav .nav-text {
-            font-size: 12px;
-            color: rgba(252, 252, 252, 1);
-          }
+                    .footer-nav .nav-icon {
+                        margin-top: 13px;
+                        width: 25px;
+                        height: 25px;
+                    }
 
-          .footer-nav .nav-item.active .nav-icon {
-            margin-top: 15px;
-            width: 44px;
-            height: 44px;
-          }
+                    .footer-nav .nav-text {
+                        font-size: 12px;
+                        color: rgba(252, 252, 252, 1);
+                    }
 
-          .footer-nav .nav-item.active .nav-text {
-            color: rgba(255, 38, 150, 1);
-          }
+                    .footer-nav .nav-item.active .nav-icon {
+                        margin-top: 15px;
+                        width: 44px;
+                        height: 44px;
+                    }
 
-          .footer-nav .left-nav {
-            margin-left: 20px;
-          }
+                    .footer-nav .nav-item.active .nav-text {
+                        color: rgba(255, 38, 150, 1);
+                    }
 
-          .footer-nav .right-nav {
-            margin-right: 20px;
-          }
+                    .footer-nav .left-nav {
+                        margin-left: 20px;
+                    }
 
-          .footer-nav .center-nav .nav-icon {
-            margin-top: -2px;
-            width: 43px;
-            height: 43px;
-          }
+                    .footer-nav .right-nav {
+                        margin-right: 20px;
+                    }
 
-          .footer-nav .center-nav.active .nav-icon {
-            margin-top: -2px;
-            width: 62px;
-            height: 62px;
-          }
-        `}</style>
-      </div>
-    )
-  }
-)
+                    .footer-nav .center-nav .nav-icon {
+                        margin-top: -2px;
+                        width: 43px;
+                        height: 43px;
+                    }
 
-AppLayout.displayName = "AppLayout"
+                    .footer-nav .center-nav.active .nav-icon {
+                        margin-top: -2px;
+                        width: 62px;
+                        height: 62px;
+                    }
+                `}</style>
+            </div>
+        );
+    },
+);
+
+AppLayout.displayName = "AppLayout";
