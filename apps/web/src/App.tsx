@@ -50,7 +50,7 @@ function App() {
                     icon: images.nav.footProfile,
                     activeIcon: images.nav.footProfileOn,
                     position: "center" as const,
-                    onClick: () => navigate("/ui"),
+                    onClick: () => navigate("/vip"),
                 },
                 {
                     label: t("footer.kol"),

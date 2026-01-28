@@ -49,6 +49,8 @@ import accountChannel from './images/account/channel.png'
 import accountClose from './images/account/close.png'
 import accountCopyIcon from './images/account/copy_icon.png'
 import accountCreator from './images/account/creator.png'
+import accountEnt from './images/account/ent.png'
+import accountEnt2 from './images/account/ent2.png'
 import accountEntertainer from './images/account/entertainer.png'
 import accountExit from './images/account/exit.png'
 import accountGiftIcon from './images/account/gift-icon.png'
@@ -210,6 +212,8 @@ export const images = {
     close: accountClose,
     copyIcon: accountCopyIcon,
     creator: accountCreator,
+    ent: accountEnt,
+    ent2: accountEnt2,
     entertainer: accountEntertainer,
     exit: accountExit,
     giftIcon: accountGiftIcon,

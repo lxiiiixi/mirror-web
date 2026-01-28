@@ -7,6 +7,7 @@ import UIShowcase from "../pages/UIShowcase";
 import WorkDetail from "../pages/WorkDetail";
 import EmailLogin from "../pages/EmailLogin";
 import Assets from "../pages/Assets";
+import Vip from "../pages/Vip";
 import { type AppLayoutFooterItem } from "../ui/AppLayout";
 
 export type RouteLayoutType = "walletBar" | "pageNav" | "none";
@@ -54,6 +55,17 @@ export const routeConfigs: RouteConfig[] = [
     {
         path: "/ui",
         component: UIShowcase,
+        layout: {
+            type: "walletBar",
+            showFooter: true,
+            activeFooterIndex: 1,
+        },
+        showLoginModal: true,
+        showAlertHost: true,
+    },
+    {
+        path: "/vip",
+        component: Vip,
         layout: {
             type: "walletBar",
             showFooter: true,

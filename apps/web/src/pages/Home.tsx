@@ -170,12 +170,6 @@ function Home() {
     }, [items]);
 
     return (
-        <div className="flex justify-center py-[30px]">
-            <Spinner size="large" />
-        </div>
-    );
-
-    return (
         <div className="">
             <Notice message={t("notice.defaultMessage")} />
             <HomeBanner autoplay={true} interval={4000} />
