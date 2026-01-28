@@ -230,7 +230,7 @@ function Assets() {
             <span>{t('account.token')}</span>
             <img src={images.account.right} alt="" />
           </div>
-          <div className="item">
+          <div className="item clickable" onClick={() => navigate('/account/billing')}>
             <span>{t('account.bill')}</span>
             <img src={images.account.right} alt="" />
           </div>

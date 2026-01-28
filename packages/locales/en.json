@@ -471,6 +471,7 @@
     "pageTitle": "Billing history",
     "income": "Income",
     "expenditure": "Expenditure",
+    "type": "Type",
     "date": "DATE",
     "id": "ID",
     "quantity": "QUANTITY",

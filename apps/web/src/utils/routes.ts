@@ -9,6 +9,7 @@ import EmailLogin from "../pages/EmailLogin";
 import Assets from "../pages/Assets";
 import Vip from "../pages/Vip";
 import HoldToken from "../pages/HoldToken";
+import BillingHistory from "../pages/BillingHistory";
 import { type AppLayoutFooterItem } from "../ui/AppLayout";
 
 export type RouteLayoutType = "walletBar" | "pageNav" | "none";
@@ -94,6 +95,18 @@ export const routeConfigs: RouteConfig[] = [
             type: "pageNav",
             showFooter: false,
             pageTitle: (t) => t("hold_token.title"),
+            backIconSrc: images.works.backBtn,
+        },
+        showLoginModal: true,
+        showAlertHost: true,
+    },
+    {
+        path: "/account/billing",
+        component: BillingHistory,
+        layout: {
+            type: "pageNav",
+            showFooter: false,
+            pageTitle: (t) => t("miningRecords.pageTitle"),
             backIconSrc: images.works.backBtn,
         },
         showLoginModal: true,
