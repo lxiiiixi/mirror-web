@@ -104,9 +104,13 @@ function Assets() {
         setWithdrawDialogOpen(true);
     };
 
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate("/");
+        }
+    }, [isLoggedIn, navigate]);
+
     if (!isLoggedIn) {
-        // 回到首页
-        navigate("/");
         return null;
     }
 
