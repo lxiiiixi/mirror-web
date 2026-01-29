@@ -57,6 +57,7 @@ function App() {
                     icon: images.nav.footDiscover,
                     activeIcon: images.nav.footDiscoverOn,
                     position: "right" as const,
+                    onClick: () => navigate("/promotion"),
                 },
             ],
         }),

@@ -1,4 +1,5 @@
 import { images } from "@mirror/assets";
+import { NavigateFunction } from "react-router-dom";
 
 /**
  * 作品类型定义
@@ -44,4 +45,30 @@ export const getWorkTypeInfo = (type: WorkType) => {
         regular: { text: "Regular", icon: images.works.product.regular },
     };
     return typeMap[type] || typeMap.comic;
+};
+
+export const goToWorkDetail = (
+    navigate: NavigateFunction,
+    id: number | string,
+    rawType?: number,
+) => {
+    const query = rawType ? `?id=${id}&type=${rawType}` : `?id=${id}`;
+    navigate(`/works/detail${query}`);
+};
+
+export const isTokenWork = (work: unknown) => {
+    const shareCount =
+        Number(
+            (work as { share_count?: number | string }).share_count ??
+                (work as { shareCount?: number | string }).shareCount ??
+                0,
+        ) || 0;
+    const tokenFlag =
+        (work as { token_name?: string }).token_name ||
+        (work as { token_symbol?: string }).token_symbol ||
+        (work as { token_balance?: number }).token_balance ||
+        (work as { TokenName?: string }).TokenName ||
+        (work as { TokenBalance?: number }).TokenBalance ||
+        (work as { can_list?: boolean }).can_list;
+    return Boolean(tokenFlag) || shareCount > 0;
 };

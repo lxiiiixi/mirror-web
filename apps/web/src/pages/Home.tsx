@@ -15,30 +15,13 @@ import {
     type ProjectTabItem,
 } from "../ui";
 import { HomeBanner } from "../components";
-import { workTypeMap } from "../utils/work";
+import { goToWorkDetail, isTokenWork, workTypeMap } from "../utils/work";
 
 const splitCreators = (author: string) =>
     author
         .split(/[/|、,，]/g)
         .map(name => name.trim())
         .filter(Boolean);
-
-const isTokenWork = (work: unknown) => {
-    const shareCount =
-        Number(
-            (work as { share_count?: number | string }).share_count ??
-                (work as { shareCount?: number | string }).shareCount ??
-                0,
-        ) || 0;
-    const tokenFlag =
-        (work as { token_name?: string }).token_name ||
-        (work as { token_symbol?: string }).token_symbol ||
-        (work as { token_balance?: number }).token_balance ||
-        (work as { TokenName?: string }).TokenName ||
-        (work as { TokenBalance?: number }).TokenBalance ||
-        (work as { can_list?: boolean }).can_list;
-    return Boolean(tokenFlag) || shareCount > 0;
-};
 
 function Home() {
     const { t } = useTranslation();
@@ -108,8 +91,7 @@ function Home() {
     }, [t, tokenItems]);
 
     const handleNavigateToDetail = (id: number | string, rawType?: number) => {
-        const query = rawType ? `?id=${id}&type=${rawType}` : `?id=${id}`;
-        navigate(`/works/detail${query}`);
+        goToWorkDetail(navigate, id, rawType);
     };
 
     const products = useMemo<Array<ProductData & { rawType?: number }>>(() => {

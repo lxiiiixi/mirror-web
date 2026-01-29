@@ -10,6 +10,7 @@ import Assets from "../pages/Assets";
 import Vip from "../pages/Vip";
 import HoldToken from "../pages/HoldToken";
 import BillingHistory from "../pages/BillingHistory";
+import Promotion from "../pages/Promotion";
 import { type AppLayoutFooterItem } from "../ui/AppLayout";
 
 export type RouteLayoutType = "walletBar" | "pageNav" | "none";
@@ -72,6 +73,17 @@ export const routeConfigs: RouteConfig[] = [
             type: "walletBar",
             showFooter: true,
             activeFooterIndex: 1,
+        },
+        showLoginModal: true,
+        showAlertHost: true,
+    },
+    {
+        path: "/promotion",
+        component: Promotion,
+        layout: {
+            type: "walletBar",
+            showFooter: true,
+            activeFooterIndex: 2,
         },
         showLoginModal: true,
         showAlertHost: true,

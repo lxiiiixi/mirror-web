@@ -224,6 +224,7 @@
   },
   "promotion": {
     "bindSuperior": "Bind the superior",
+    "bindSu": "Bind successful",
     "subTitle": "Recommend VIP to enjoy 10-15% commission",
     "promotion": "Community",
     "directCommission": "Direct commission 10%:",
