@@ -203,6 +203,8 @@ export const images = {
   loginImg: loginImg,
   empty: emptyImg,
 
+  icons,
+
   // 账户相关
   account: {
     refresh: accountRefresh,

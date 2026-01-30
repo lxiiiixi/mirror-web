@@ -323,6 +323,19 @@ export interface WorkDetailResponseData {
     work_name: string;
     work_total_chapter: number;
     work_type: number;
+
+    /** 空投/推广相关（可选，后端未提供时用占位） */
+    airdrop_visits?: number;
+    airdrop_progress_percent?: number;
+    airdrop_countdown?: string;
+    airdrop_amount?: string;
+    invitation_code?: string;
+    invitation_link?: string;
+    invited_count?: number;
+    /** 制作团队（可选） */
+    production_team?: Array<{ name: string; role: string; avatar_url?: string }>;
+    /** 预告/剧照视频 URL（可选） */
+    trailer_video_url?: string;
 }
 
 export interface WorkUploadRequest {
@@ -392,13 +405,17 @@ export interface WorkChapterParams {
 }
 
 export interface WorkChapterResponseData {
-    ID: number;
-    ChapterId: number;
-    ComicId: number;
-    Title: string;
-    Content: string;
-    CreateTime: string;
-    UpdateTime: string;
+    chapter_id: number;
+    content: string; // 图片或视频地址，多个地址用逗号分隔
+    content_type: number;
+    cover_url: string;
+    duration_seconds: number;
+    id: number;
+    parent_id: number;
+    title: string;
+    video_url: string;
+    create_time: string;
+    update_time: string;
 }
 export interface WorkActionRequest {
     work_id: number;
