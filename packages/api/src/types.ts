@@ -453,7 +453,7 @@ export interface WorkPaymentBalancesResponseData {
     usdt_available: DecimalString;
     chapter_price_token: number;
     chapter_price_ent: number;
-    chapter_price_usdt: DecimalString;
+    String;
 }
 
 export interface WorkChapterParams {
@@ -462,17 +462,25 @@ export interface WorkChapterParams {
 }
 
 export interface WorkChapterResponseData {
-    chapter_id: number;
-    content: string; // 图片或视频地址，多个地址用逗号分隔
-    content_type: number;
-    cover_url: string;
-    duration_seconds: number;
-    id: number;
-    parent_id: number;
-    title: string;
-    video_url: string;
-    create_time: string;
-    update_time: string;
+    // chapter_id: number;
+    // content: string; // 图片或视频地址，多个地址用逗号分隔
+    // content_type: number;
+    // cover_url: string;
+    // duration_seconds: number;
+    // id: number;
+    // parent_id: number;
+    // title: string;
+    // video_url: string;
+    // create_time: string;
+    // update_time: string;
+
+    ID: number;
+    ChapterId: number;
+    ComicId: number;
+    Title: string;
+    Content: string; // 图片或视频地址，多个地址用逗号分隔
+    CreateTime: string;
+    UpdateTime: string;
 }
 export interface WorkActionRequest {
     work_id: number;

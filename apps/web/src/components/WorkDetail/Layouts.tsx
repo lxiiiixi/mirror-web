@@ -39,7 +39,7 @@ export function WorkDetailHeader({ title }: { title: string }) {
                     className="w-full h-full object-contain"
                 />
             </button>
-            <h1 className="flex-1 truncate text-center text-[18px] font-bold text-white">
+            <h1 className="flex-1 truncate text-center text-[18px] font-bold text-white px-4 mt-[2px]">
                 {title}
             </h1>
             <div className="h-[18px] w-[18px] shrink-0" aria-hidden />
