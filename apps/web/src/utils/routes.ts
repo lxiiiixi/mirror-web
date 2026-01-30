@@ -11,6 +11,7 @@ import Vip from "../pages/Vip";
 import HoldToken from "../pages/HoldToken";
 import BillingHistory from "../pages/BillingHistory";
 import Promotion from "../pages/Promotion";
+import PointsRedemption from "../pages/PointsRedemption";
 import VipPurchase from "../pages/VipPurchase";
 import { AssetsLogoutButton } from "../components/Account/AssetsLogoutButton";
 import { type AppLayoutFooterItem } from "../ui/AppLayout";
@@ -98,6 +99,15 @@ export const routeConfigs: RouteConfig[] = [
             type: "walletBar",
             showFooter: true,
             activeFooterIndex: 2,
+        },
+        showLoginModal: true,
+        showAlertHost: true,
+    },
+    {
+        path: "/points-redemption",
+        component: PointsRedemption,
+        layout: {
+            type: "none",
         },
         showLoginModal: true,
         showAlertHost: true,

@@ -1,3 +1,4 @@
+import { WorkSummary } from "@mirror/api";
 import { images } from "@mirror/assets";
 import { NavigateFunction } from "react-router-dom";
 
@@ -7,44 +8,118 @@ import { NavigateFunction } from "react-router-dom";
 export type WorkType =
     | "comic"
     | "novel"
-    | "movie"
     | "tv"
     | "music"
     | "vlog"
     | "animate"
     | "drama"
     | "playlet"
-    | "regular";
+    | "movie";
 
-export const workTypeMap: Record<number, WorkType> = {
-    1: "animate",
-    2: "music",
-    3: "novel",
-    4: "comic",
-    5: "animate",
-    6: "tv",
-    7: "playlet",
-    8: "vlog",
-    9: "regular",
+type WorkTypeInfo = {
+    type: WorkType;
+    text: string;
+    value: number;
+    icon: string;
+    isShowChapter: boolean;
+    isShowTrailersStills: boolean;
+};
+
+const icons = images.works.product;
+
+// 这块是电影的话，是只显示剧照，不显示章节。
+// 那么影视剧呢是又显示剧照，又显示章节的，
+// 小说和漫画只显示章节，
+// 音乐的话就也是只显示章节
+// 所以说剧集类的是所有展示
+
+export const WORK_TYPE: Array<WorkTypeInfo> = [
+    {
+        value: 1,
+        type: "animate",
+        text: "Animation",
+        isShowChapter: false,
+        isShowTrailersStills: false,
+        icon: icons.animate,
+    },
+    {
+        value: 2,
+        type: "music",
+        text: "Music",
+        isShowChapter: true,
+        isShowTrailersStills: false,
+        icon: icons.music,
+    },
+    {
+        value: 3,
+        type: "novel",
+        text: "Novel",
+        isShowChapter: true,
+        isShowTrailersStills: false,
+        icon: icons.novel,
+    },
+    {
+        value: 4,
+        type: "comic",
+        text: "Comic",
+        isShowChapter: true,
+        isShowTrailersStills: true,
+        icon: icons.comic,
+    },
+    {
+        value: 5,
+        type: "animate",
+        text: "Animated Film",
+        isShowChapter: false,
+        isShowTrailersStills: false,
+        icon: icons.animate,
+    },
+    {
+        value: 6,
+        type: "tv",
+        text: "TV Drama",
+        isShowChapter: true,
+        isShowTrailersStills: true,
+        icon: icons.tv,
+    },
+    {
+        value: 7,
+        type: "playlet",
+        text: "Playlet",
+        isShowChapter: true,
+        isShowTrailersStills: true,
+        icon: icons.playlet,
+    },
+    {
+        value: 8,
+        type: "vlog",
+        text: "Vlog",
+        isShowChapter: false,
+        isShowTrailersStills: false,
+        icon: icons.vlog,
+    },
+    {
+        value: 9,
+        type: "movie",
+        text: "Movie",
+        isShowChapter: false,
+        isShowTrailersStills: true,
+        icon: icons.regular,
+    },
+];
+
+/**
+ * 根据 value 获取作品类型
+ */
+export const getWorkTypeByValue = (value: number) => {
+    return WORK_TYPE.find(item => item.value === value);
 };
 
 /**
  * 获取作品类型信息
  */
 export const getWorkTypeInfo = (type: WorkType) => {
-    const typeMap: Record<WorkType, { text: string; icon: string }> = {
-        comic: { text: "Comic", icon: images.works.product.comic },
-        novel: { text: "Novel", icon: images.works.product.novel },
-        movie: { text: "Movie", icon: images.works.product.movie },
-        tv: { text: "TV", icon: images.works.product.tv },
-        music: { text: "Music", icon: images.works.product.music },
-        vlog: { text: "Vlog", icon: images.works.product.vlog },
-        animate: { text: "Animate", icon: images.works.product.animate },
-        drama: { text: "Drama", icon: images.works.product.drama },
-        playlet: { text: "Playlet", icon: images.works.product.playlet },
-        regular: { text: "Regular", icon: images.works.product.regular },
-    };
-    return typeMap[type] || typeMap.comic;
+    return WORK_TYPE.find(item => item.type === type);
 };
 
 export const goToWorkDetail = (
@@ -56,19 +131,13 @@ export const goToWorkDetail = (
     navigate(`/works/detail${query}`);
 };
 
-export const isTokenWork = (work: unknown) => {
-    const shareCount =
-        Number(
-            (work as { share_count?: number | string }).share_count ??
-                (work as { shareCount?: number | string }).shareCount ??
-                0,
-        ) || 0;
-    const tokenFlag =
-        (work as { token_name?: string }).token_name ||
-        (work as { token_symbol?: string }).token_symbol ||
-        (work as { token_balance?: number }).token_balance ||
-        (work as { TokenName?: string }).TokenName ||
-        (work as { TokenBalance?: number }).TokenBalance ||
-        (work as { can_list?: boolean }).can_list;
+/**
+ * 判断作品是否是 token 作品
+ * @param work 作品
+ * @returns 是否是 token 作品
+ */
+export const isTokenWork = (work: WorkSummary) => {
+    const shareCount = Number(work.share_count ?? 0) || 0;
+    const tokenFlag = work.token_cover_url;
     return Boolean(tokenFlag) || shareCount > 0;
 };

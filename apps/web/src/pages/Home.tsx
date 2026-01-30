@@ -15,7 +15,7 @@ import {
     type ProjectTabItem,
 } from "../ui";
 import { HomeBanner } from "../components";
-import { goToWorkDetail, isTokenWork, workTypeMap } from "../utils/work";
+import { getWorkTypeByValue, goToWorkDetail, isTokenWork } from "../utils/work";
 
 const splitCreators = (author: string) =>
     author
@@ -141,7 +141,7 @@ function Home() {
                 id: work.id,
                 name,
                 coverUrl,
-                type: workTypeMap[workTypeValue] ?? "comic",
+                type: getWorkTypeByValue(workTypeValue)?.type ?? "comic",
                 shareCount,
                 isShared,
                 creators,
